@@ -62,3 +62,9 @@ href="http://www.masonhq.org/">HTML::Mason</a>.
 
 	[mason]: http://www.masonhq.org/
 
+Here's a new feature -- link text recogition: this is a test of linktext.
+That should be a href...
+
+	Auto: [test of linktext]: http://ettext.taint.org/
+
+

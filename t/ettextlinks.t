@@ -2,7 +2,7 @@
 
 use lib '.'; use lib 't';
 use EtTest; ettext_t_init("ettextlinks");
-use Test; BEGIN { plan tests => 43 };
+use Test; BEGIN { plan tests => 45 };
 
 # ---------------------------------------------------------------------------
 
@@ -88,6 +88,11 @@ use Test; BEGIN { plan tests => 43 };
   (blah blah
   <a href="http://webmake.taint.org/">http://webmake.taint.org/</a>)},
   'links_followed_by_non_link_chars',
+
+  q{a new feature -- link text recogition: this is a <a href="http://ettext.
+  taint.org/">test of linktext</a>.},
+  'linktext',
+
 
 );
 

@@ -50,7 +50,7 @@ use vars qw{
 
 @ISA = qw();
 
-$VERSION = "1.2";
+$VERSION = "2.1";
 sub Version { $VERSION; }
 
 1;

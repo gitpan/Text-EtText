@@ -1,6 +1,6 @@
 #!/bin/sh
 
-WEBDIR=/home/jm/public_html_et
+WEBDIR=/home/jm/ettext.taint.org
 
 VERS=`./build/get_version` ; export VERS
 ./build/update_devel

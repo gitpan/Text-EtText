@@ -1,3 +1,25 @@
+2001-06-11 13:47  jmason
+
+	* lib/Text/EtText.pm: bumped to 2.1
+
+2001-06-11 13:46  jmason
+
+	* Changes, build/update_devel, build/update_stable: updated build
+	scripts
+
+2001-06-07 13:02  jmason
+
+	* Changes, specfile.raw, build/mkrpm, build/update_devel,
+	build/update_stable, lib/Text/EtText.pm,
+	lib/Text/EtText/EtText2HTML.pm, lib/Text/EtText/HTML2EtText.pm,
+	lib/Text/EtText/LinkGlossary.pm: release of 2.0
+
+2001-05-12 18:00  jmason
+
+	* doc/documentation.wmk, lib/Text/EtText/EtText2HTML.pm,
+	t/etmore.t, t/ettextlinks.t, t/ettextmarkup.t,
+	t/data/ettextlinks.etx: better XML-conformant output
+
 2001-04-23 13:57  jmason
 
 	* Changes, build/get_version: [no log message]

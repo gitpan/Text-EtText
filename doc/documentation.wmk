@@ -255,9 +255,9 @@ specification used in HTML, EtText will automatically add href tags for URLs
 and email addresses  that occur in the text.  In addition, EtText supports its
 own link format, as follows.
 
-The basic concept is of a word or ''quoted set of words'' followed by a link
-label in &etsqi;square brackets&etsqo;, like this: **''this is a link''
-&etsqi;label&etsqo;**.
+The basic concept is of a word or ''quoted set of words'' followed by an
+optional link label in &etsqi;square brackets&etsqo;, like this: **''this is a
+link'' &etsqi;label&etsqo;**.
 
 The href used in the link is then defined at another point in the document, as
 an indented line like this:
@@ -290,24 +290,28 @@ will mean that any occurrence of the name **''Justin Mason''**, in quotes, in
 __any__ EtText content chunk or file in the site, becomes a link to that
 address.
 
-In addition, if the link definition is preceded with ##Auto:##, the quotes are
-not required, and any occurrence of the word (with or without quotes) will
-become a link.
-
-<safe>
-  Auto: [WebMake]: http://webmake.taint.org/
-</safe>
-
-These links are stored in the <a href=http://webmake.taint.org/>WebMake</a>
-cache file, if WebMake is being used.  Alternatively, if you are using the
-Text::EtText modules yourself, provide an implementation of the
-**Text::EtText::LinkGlossary** interface to support this.
-
-  Auto: [WebMake]: http://webmake.taint.org/
+These links are stored in the WebMake cache file, if WebMake is being used.
+Alternatively, if you are using the Text::EtText modules yourself, provide an
+implementation of the **Text::EtText::LinkGlossary** interface to support this.
 
 Quoted bits of text that do not map to an entry in the glossary are not
 converted to links (unless they're followed by a square-bracketed link-label
 reference).
+
+More Convenient Links
+~~~~~~~~~~~~~~~~~~~~~
+
+In addition, if the link definition is preceded with ##Auto:##, the quotes are
+not required, and any occurrence of the words in the link label, with or
+without quotes, will become a link.
+
+<safe>
+  Auto: [WebMake]: http://webmake.taint.org/
+  Auto: [any occurrence of the words]: http://webmake.taint.org/
+</safe>
+
+URLs and Email Addresses
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 URLs, such as http://webmake.taint.org/ , and email addresses, such as
 jm@nospam-jmason.org, are automatically converted into links to that same
@@ -321,6 +325,8 @@ entities **&amp;etsqi;** and **&amp;etsqo;**, which map to &etsqi; and &etsqo;
 respectively; replace quote characters, **"**, with two apostrophes,
 **&#39;&#39;**.  If that doesn't do the trick, wrap the entire section of text
 with the **&lt;!--etsafe--&gt;**...**&lt;!--/etsafe--&gt;** tags.
+
+  Auto: [WebMake]: http://webmake.taint.org/
 
 </content>
 <content name="similar.txt" format="text/et">

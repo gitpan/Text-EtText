@@ -8,13 +8,13 @@ use Test; BEGIN { plan tests => 17 };
 
 %patterns = (
 
-  q{<blockquote> <p> &lt;type attribute=val ...&gt; &lt;/type&gt;
-   </p> </blockquote>},
-  'format_bug',
+  q{<blockquote> &lt;type attribute=val ...&gt; &lt;/type&gt;
+   </blockquote>},
+  'no_format_bug',
 
-  q{<blockquote> <p> [<em>label</em>]:
-   <em><a href="http://url">http://url</a>...</em> </p> </blockquote>},
-  'ettext_link_bug',
+  q{<blockquote> [<em>label</em>]:
+   <em><a href="http://url">http://url</a>...</em> </blockquote>},
+  'no_ettext_link_bug',
 
   q{Test of lists right beside one another.  </p> <ul> <li>
   a list item </li> <li> another </li> <li>
@@ -32,8 +32,8 @@ use Test; BEGIN { plan tests => 17 };
   q{ <hr /> <p> That was a HR. so is this: </p> <hr /> },
   'hrs_at_top',
 
-  q{Another PRE test: </p> <p> <pre> Bar [foo] Baz </pre>
- </p> <p> Could you see the square brackets},
+  q{Another PRE test: </p> <pre> Bar [foo] Baz </pre>
+  <p> Could you see the square brackets},
   'pre_sq_brackets',
 
   q{Balanced tags: <b>test</b>. <span class="green">foo</span>. <i

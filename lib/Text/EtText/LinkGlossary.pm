@@ -29,16 +29,14 @@ The interface which needs to be implemented is as follows:
 
 package Text::EtText::LinkGlossary;
 
-require Exporter;
 use Carp;
 use strict;
 
 use vars qw{
-	@ISA @EXPORT
+	@ISA
 };
 
-@ISA = qw(Exporter);
-@EXPORT = qw();
+@ISA = qw();
 
 ###########################################################################
 

@@ -41,14 +41,11 @@ use Text::EtText::LinkGlossary;
 use Text::EtText::DefaultGlossary;
 
 use vars qw{
-	@ISA $VERSION $ATTRS_WITH_URLS $BALANCED_TAG_GEN_TAGS
+	@ISA $ATTRS_WITH_URLS $BALANCED_TAG_GEN_TAGS
 	$URL_PROTECTOR $prot
 };
 
 @ISA = qw();
-
-$VERSION = $Text::EtText::VERSION;
-sub Version { $VERSION; }
 
 # attributes that can take URL arguments: cf. HTML::LinkExtor.
 $ATTRS_WITH_URLS =
@@ -560,13 +557,13 @@ sub do_headings {
 
   # but HR tags or headings don't need paras.
   $$html =~ s{<p>\s*
-	    (<hr(?:\s[^>]+|)>|<br(?:\s[^>]+|)>|<a[^>]+><h\d>.*?<\/h\d><\/a>)
-	    \s*<\/p>}
-	    {$1}gisx;
+	      (<hr(?:\s[^>]+|)>|<br(?:\s[^>]+|)>|
+	      <a[^>]+><h\d>.*?<\/h\d><\/a>|
+	      <pre(?:\s[^>]+|)>.*?<\/pre>)
+	    \s*<\/p>}{$1}gisx;
   $$html =~ s{<p>\s*
 	    ((?:<[^>]+>\s*)
-	    *?)\s*<\/p>}
-	    {$1}gisx;
+	    *?)\s*<\/p>}{$1}gisx;
 
   $$html .= "</p>";
 }
@@ -769,6 +766,7 @@ sub markup_lists {
   undef $self->{list_alternative_indent};
   undef $self->{list_indent};
   undef $self->{list_tag};
+
   $html;
 }
 
@@ -819,7 +817,8 @@ sub indent_item_start {
   }
   else {
     $closeitemtag = '</blockquote>';
-    $line = "<blockquote>".$openptag.$line;
+    $line = "<blockquote>".$line;
+    $openptag = ''; $closeptag = '';
   }
   $self->{current_item_cls_tag} = $closeptag.$closeitemtag;
 

@@ -31,21 +31,16 @@ the web at http://webmake.taint.org/ .
 
 package Text::EtText::HTML2EtText;
 
-require Exporter;
 use Carp;
 use strict;
 use locale;
 use HTML::Entities;
 
 use vars qw{
-	@ISA @EXPORT $VERSION
+	@ISA
 };
 
-@ISA = qw(Exporter);
-@EXPORT = qw();
-
-$VERSION = "0.2";
-sub Version { $VERSION; }
+@ISA = qw();
 
 ###########################################################################
 

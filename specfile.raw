@@ -6,7 +6,7 @@
 %define ver      __VERSION__
 %define rel      1
 %define prefix   /usr
-%define siteperldir %{prefix}/lib/perl5/site_perl/5.005
+%define siteperldir %{prefix}/lib/perl5/site_perl/5.6.0
 
 Name: EtText
 Summary: A plain-text markup format for HTML
@@ -22,7 +22,7 @@ BuildRoot: /tmp/ettext-%{ver}-root
 Packager: Justin Mason <jm@jmason.org>
 BuildArchitectures: noarch
 
-Requires: perl >= 5.003
+Requires: perl >= 5.6
 Prefix: /usr
 
 %description
@@ -36,7 +36,7 @@ it also adds a powerful link markup system.
 EtText markup is simple and effective; it's very similar to WikiWikiWeb
 TextFormattingRules or Zope's StructuredText.
 
-EtText requires Perl 5.
+EtText requires Perl 5.  This RPM assumes you are using Perl 5.6.0.
 
 %prep
 %setup -n Text-EtText-%{ver}
@@ -62,8 +62,9 @@ make PREFIX=$RPM_BUILD_ROOT/usr install
 
 %{prefix}/bin/ethtml2text
 %{prefix}/bin/ettext2html
-%{prefix}/man/man1/ettext2html.1.gz
-%{prefix}/man/man1/ethtml2text.1.gz
+%{prefix}/share/man/man1/ettext2html.1.gz
+%{prefix}/share/man/man1/ethtml2text.1.gz
+%{prefix}/share/man/man3/Text::EtText::*.3pm.gz
 
 %{siteperldir}/Text/EtText/*.pm
 

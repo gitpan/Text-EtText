@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WEBDIR=/home/jm/public_html_et
+WEBDIR=/home/jm/ettext.taint.org
 WEBMAKE=/home/jm/ftp/webmake
 
 vers=`build/get_version`
@@ -24,14 +24,8 @@ cp Text-EtText-$vers.tar.gz $WEBDIR/devel
 make zipdist
 cp Text-EtText-$vers.zip $WEBDIR/devel
 
-echo "Copying distribution into /dist on site..."
-(
-  cd $WEBDIR
-  tar xfz devel/Text-EtText-$vers.tar.gz	\
-		2>&1 | grep -v 'Archive contains future timestamp'
-  rm -rf dist ; mv Text-EtText-$vers dist
+echo $vers > $WEBDIR/latest_version
 
-  rm -rf doc ; cp -r dist/doc doc
-)
+( cd $WEBDIR/devel ; cvs add *EtText* )
 
 ls -l $WEBDIR/devel
