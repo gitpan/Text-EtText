@@ -1,0 +1,49 @@
+#!/usr/bin/perl -w
+
+use lib '.'; use lib 't';
+use EtTest; ettext_t_init("etmore");
+use Test; BEGIN { plan tests => 17 };
+
+# ---------------------------------------------------------------------------
+
+%patterns = (
+
+  q{<blockquote> <p> &lt;type attribute=val ...&gt; &lt;/type&gt;
+   </p> </blockquote>},
+  'format_bug',
+
+  q{<blockquote> <p> [<em>label</em>]:
+   <em><a href="http://url">http://url</a>...</em> </p> </blockquote>},
+  'ettext_link_bug',
+
+  q{Test of lists right beside one another.  </p> <ul> <li>
+  <p> a list item </p> </li> <li> another </li> <li>
+  and another. This one's a bit longer though... blah blah blah
+   foo blah etc blah </li> <ul> <li> nest 'em!  </li> <li>
+  again </li> </ul> <li> and back.  </li> </ul>},
+  'ettext_sardine_lists',
+
+  q{<h1>Title right at top of page</h1>},
+  'h1_title_at_top',
+ 
+  q{<h2>Smaller title at top of page</h2>},
+  'h2_title_at_top',
+
+  q{ <hr /> <p> That was a HR. so is this: </p> <hr /> },
+  'hrs_at_top',
+
+  q{Another PRE test: </p> <p> <pre> Bar [foo] Baz </pre>
+ </p> <p> Could you see the square brackets},
+  'pre_sq_brackets',
+
+  q{Balanced tags: <b>test</b>. <span class="green">foo</span>. <i
+  class="green">green italics</i>},
+  'balanced_tags',
+
+);
+
+# ---------------------------------------------------------------------------
+
+ok (etrun ("< data/$testname.etx", \&patterns_run_cb));
+ok_all_patterns();
+

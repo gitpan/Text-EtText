@@ -1,0 +1,37 @@
+#!/bin/bash
+
+WEBDIR=/home/jm/public_html_et
+WEBMAKE=/home/jm/ftp/webmake
+
+vers=`build/get_version`
+
+# delete old CVS files
+find . -name '.#*' -print | xargs rm -f
+
+make clean ; perl Makefile.PL ; make
+
+echo "Building documentation..."
+( cd doc ; $WEBMAKE/webmake )
+make distcheck
+
+echo "Creating 'Changes' file from CVS change log..."
+cvs2cl.pl -f Changes
+
+rm -f Text-EtText-$vers.tar.gz Text-EtText-$vers.zip
+make tardist
+cp Text-EtText-$vers.tar.gz $WEBDIR/devel
+
+make zipdist
+cp Text-EtText-$vers.zip $WEBDIR/devel
+
+echo "Copying distribution into /dist on site..."
+(
+  cd $WEBDIR
+  tar xfz devel/Text-EtText-$vers.tar.gz	\
+		2>&1 | grep -v 'Archive contains future timestamp'
+  rm -rf dist ; mv Text-EtText-$vers dist
+
+  rm -rf doc ; cp -r dist/doc doc
+)
+
+ls -l $WEBDIR/devel
