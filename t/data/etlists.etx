@@ -23,32 +23,6 @@ How about definition lists?
 
 	Baz:	you get the idea.
 
-That's enough of that. What about *with* list tags?
-
-Checking lists with included start-end tags.
-
-<ul>
-
-    * list 1
-
-    * l1 i2
-
-    * l1 i3
-
-</ul>
-
-Next! I prefer this one I think.
-
-<ol>
-
-  1. foo
-
-  1. bar
-
-  1. baz
-
-</ol>
-
 What about indented lists?
 
     * list 1

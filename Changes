@@ -1,3 +1,51 @@
+2001-10-01 04:41  jmason
+
+	* t/etmailto.t: fixed 1 failing test, ready for release
+
+2001-09-30 06:33  jmason
+
+	* lib/Text/EtText/Lists.pm: blocked BR additions to html-only lines
+
+2001-09-30 04:55  jmason
+
+	* lib/Text/EtText/EtText2HTML.pm, t/ettextmarkup.t, t/menorah.t:
+	headers now have id tags for XHTML conformance
+
+2001-09-20 08:39  jmason
+
+	* doc/documentation.wmk: more fixes
+
+2001-09-20 08:35  jmason
+
+	* doc/documentation.wmk, lib/Text/EtText/HTML2EtText.pm,
+	lib/Text/EtText/Lists.pm: fixed new bug, added doco
+
+2001-09-20 07:24  jmason
+
+	* MANIFEST, Makefile.PL, ettext2html.raw, doc/documentation.wmk,
+	lib/Text/EtText/EtText2HTML.pm, lib/Text/EtText/Lists.pm,
+	t/basiclist.t, t/basicparas.t, t/blockquoteinlist.t, t/etlists.t,
+	t/etmailto.t, t/etmore.t, t/ettextmarkup.t, t/linklist.t, t/mail.t,
+	t/menorah.t, t/oldparastyle.t, t/snakenest.t, t/sublists.t,
+	t/twolists.t, t/txt2htmlsample.t, t/data/basiclist.etx,
+	t/data/basicparas.etx, t/data/blockquoteinlist.etx,
+	t/data/etlists.etx, t/data/linklist.etx, t/data/mail.etx,
+	t/data/menorah.etx, t/data/oldparastyle.etx, t/data/snakenest.etx,
+	t/data/sublists.etx, t/data/twolists.etx,
+	t/data/txt2htmlsample.etx: list-handling code totally rewritten and
+	totally cool
+
+2001-08-27 08:45  jmason
+
+	* MANIFEST, MANIFEST.SKIP, Makefile.PL, ethtml2text,
+	ethtml2text.raw, ettext2html, ettext2html.raw, fixpath.pl: fixed to
+	use 'fixpath.pl' to add /usr/bin/perl line
+
+2001-06-22 00:14  jmason
+
+	* Changes, build/update_devel, build/update_stable,
+	lib/Text/EtText.pm: new version
+
 2001-06-11 13:47  jmason
 
 	* lib/Text/EtText.pm: bumped to 2.1

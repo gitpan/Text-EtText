@@ -39,6 +39,7 @@ use HTML::Entities;
 use Text::EtText;
 use Text::EtText::LinkGlossary;
 use Text::EtText::DefaultGlossary;
+use Text::EtText::Lists;
 
 use vars qw{
 	@ISA $ATTRS_WITH_URLS $BALANCED_TAG_GEN_TAGS
@@ -78,8 +79,9 @@ sub new {
 
   # set defaults for the options.
   $self->{options}->{"EtTextOneCharMarkup"} = 0;
+  $self->{options}->{"EtTextOldLinkStyle"} = 1;
   $self->{options}->{"EtTextBaseHref"} = '';
-  $self->{options}->{"EtTextHrefsRelativeToTop"} = 1;
+  $self->{options}->{"EtTextHrefsRelativeToTop"} = 0;
 
   bless ($self, $class);
   $self;
@@ -99,19 +101,26 @@ or from inside the WebMake file.)  Currently supported options are:
 Allow one-character sets of asterisks etc. to mark up as strong, emphasis etc.,
 instead of the default two-character markup.
 
+=item EtTextOldLinkStyle (default: 1)
+
+Use the older EtText link-markup style, with quote characters and single square
+brackets.  This is easy to type, but if you're using text from other people, it
+can easily destroy formatting; so the new link-markup style, with double square
+brackets, can be used instead.
+
 =item EtTextBaseHref (default: '')
 
 The base HREF to use for relative links.  If set, all relative links
 in tags with HREF attributes will be rewritten as absolute links,
 making the output HTML independent of the URL tree structure.
 
-=item EtTextHrefsRelativeToTop (default: 1)
+=item EtTextHrefsRelativeToTop (default: 0)
 
 Indicates that all EtText links are relative to the top of the WebMake document
 tree. This (obviously) is only relevant if you are using EtText in conjunction
-with WebMake.  If set, all relative links in tags with HREF attributes will be
-rewritten as relative to the ''top'' of the WebMake site, making the output
-HTML independent of the URL tree structure.
+with WebMake, and WebMake sets it by default.  If set, all relative links in
+tags with HREF attributes will be rewritten as relative to the ''top'' of the
+WebMake site, making the output HTML independent of the URL tree structure.
 
 =back
 
@@ -181,20 +190,19 @@ sub text2html {
   $html =~ s/\r\n/\n/gs;
   $html =~ s/\r/\n/gs;
 
-
   $self->do_options_and_protection (\$html);
   $self->do_text_markup (\$html);
-  $self->do_ettext_links (\$html);
-  $self->do_segmented_traverse(\$html);
-  $self->do_entities (\$html);
-  $self->do_headings (\$html);
 
-  # if we have indented paragraphs, we need to run them through the
-  # list/blockquote markup engine.
-  if ($html =~ /<p>[ \t]+/) {
-    $html = $self->markup_lists ($html);
+  $self->do_ettext_link_definitions (\$html);
+  $self->do_ettext_links (\$html);
+  if ($self->{options}->{"EtTextOldLinkStyle"}) {
+    $self->do_old_ettext_links (\$html);
   }
 
+  $self->do_segmented_traverse(\$html);
+  $self->do_headings (\$html);
+  $self->markup_lists (\$html);
+  $self->do_entities (\$html);
   $self->do_sidebars (\$html);
   $self->do_final_cleanup (\$html);
 
@@ -284,11 +292,10 @@ sub do_text_markup {
 	{<$1 class="$2">$3</$1>}gisx;
 }
 
-sub do_ettext_links {
+sub do_ettext_link_definitions {
   my ($self, $html) = @_;
   local ($_);
 
-  # link definitions.
   $$html =~ s{^\s+\[([^\]]+)\]\:\s+(\S+)\s*$}{
     $self->{links}->{$1} = $2; "\n";
   }giem;
@@ -296,8 +303,12 @@ sub do_ettext_links {
   $$html =~ s{^\s+Auto:\s+\[([^\]]+)\]\:\s+(\S+)\s*$}{
     $self->{auto_links}->{$1} = $2; "\n";
   }giem;
+}
 
-  # links.
+sub do_old_ettext_links {
+  my ($self, $html) = @_;
+  local ($_);
+
   $$html =~ s{\"([^\"]+?)\"\s*\[([^\]\s]+)\]}{	#"
     $self->link_write (1, $2, $1);
   }ges;
@@ -318,6 +329,25 @@ sub do_ettext_links {
     $$html =~ s{((?!=).\s)\"([^\"]+?)\"}{	#"
       $1.$self->link_write (1, $2, $2);
     }geis;
+  }
+}
+
+sub do_ettext_links {
+  my ($self, $html) = @_;
+  local ($_);
+
+  # [[this is a link [label]]
+  $$html =~ s{\[\[(.+?)\s+\[(.+?)\]\]}{		#"
+    $self->link_write (1, $2, $1);
+  }ges;
+
+  # glossary links.
+  if (defined $self->{glossary}) {
+    $self->update_glossary();
+
+    $$html =~ s{((?!=).\s)\[\[(.+?)\]\]}{	#"
+      $1.$self->link_write (1, $2, $2);
+    }ges;
   }
 }
 
@@ -462,7 +492,7 @@ sub markup_ettext_segment {
 
   # mailto:foo@foo links
   s{(mailto:[-_\+\.\,\/\%\=A-Za-z0-9]+)
-        (\@[-_\+\.\,\/\%\=A-Za-z0-9]+)
+        (\@[-_\+\.\/\%\=A-Za-z0-9]+)
         ([\.\,\;\:\)]?(?:\s|$))}
         {<a href=\"$1${prot}$2\">$1${prot}$2</a>$3
         }gisx; #"
@@ -533,16 +563,20 @@ sub do_headings {
 
   # do headings.
   $$html =~ s{(^\n+|\n\n)([^\n]+)[ \t]*\n-{3,}\n}{
-    "$1<a name=\"".make_a_name($2)."\"><h1>$2</h1></a>\n\n";
+    my ($pre, $text, $name) = ($1, $2, make_a_name($2));
+    "$1<a name=\"$name\" id=\"$name\"><h1>$2</h1></a>\n\n";
   }ges;
   $$html =~ s{(^\n+|\n\n)([^\n]+)[ \t]*\n={3,}\n}{
-    "$1<a name=\"".make_a_name($2)."\"><h2>$2</h2></a>\n\n";
+    my ($pre, $text, $name) = ($1, $2, make_a_name($2));
+    "$1<a name=\"$name\" id=\"$name\"><h2>$2</h2></a>\n\n";
   }ges;
   $$html =~ s{(^\n+|\n\n)([^\n]+)[ \t]*\n\~{3,}\n}{
-    "$1<a name=\"".make_a_name($2)."\"><h3>$2</h3></a>\n\n";
+    my ($pre, $text, $name) = ($1, $2, make_a_name($2));
+    "$1<a name=\"$name\" id=\"$name\"><h3>$2</h3></a>\n\n";
   }ges;
   $$html =~ s{(^\n+|\n\n)([0-9A-Z][^a-z]+)[ \t]*\n\n}{
-    "$1<a name=\"".make_a_name($2)."\"><h3>$2</h3></a>\n\n";
+    my ($pre, $text, $name) = ($1, $2, make_a_name($2));
+    "$1<a name=\"$name\" id=\"$name\"><h3>$2</h3></a>\n\n";
   }ges;
 
   # now create HRs. Currently we don't bother looking at the
@@ -553,19 +587,19 @@ sub do_headings {
   $$html =~ s/\n\~{10,} *\n/\n<hr \/>\n\n/gs;
 
   # break into paragraphs.
-  $$html =~ s,\n\s*\n,\n</p>\n\n<p>,gs;
+  # $$html =~ s,\n\s*\n,\n</p>\n\n<p>,gs;
 
   # but HR tags or headings don't need paras.
-  $$html =~ s{<p>\s*
-	      (<hr(?:\s[^>]+|)>|<br(?:\s[^>]+|)>|
-	      <a[^>]+><h\d>.*?<\/h\d><\/a>|
-	      <pre(?:\s[^>]+|)>.*?<\/pre>)
-	    \s*<\/p>}{$1}gisx;
-  $$html =~ s{<p>\s*
-	    ((?:<[^>]+>\s*)
-	    *?)\s*<\/p>}{$1}gisx;
-
-  $$html .= "</p>";
+  # $$html =~ s{<p>\s*
+  # (<hr(?:\s[^>]+|)>|<br(?:\s[^>]+|)>|
+  # <a[^>]+><h\d>.*?<\/h\d><\/a>|
+  # <pre(?:\s[^>]+|)>.*?<\/pre>)
+  # \s*<\/p>}{$1}gisx;
+  # $$html =~ s{<p>\s*
+  # ((?:<[^>]+>\s*)
+  # *?)\s*<\/p>}{$1}gisx;
+  # 
+  # $$html .= "</p>";
 }
 
 sub do_sidebars {
@@ -593,8 +627,8 @@ sub do_final_cleanup {
   # trim the spare para markers at start and end.
   $$html =~ s,^\s*</p>,,s;
   $$html =~ s,<p>\s*$,,s;
-  $$html =~ s,^,<p>,s	unless ($$html =~ m,^\s*<p>,);
-  $$html =~ s,$,</p>,s	unless ($$html =~ m,<\/p>\s*$,);
+  # $$html =~ s,^,<p>,s	unless ($$html =~ m,^\s*<p>,);
+  # $$html =~ s,$,</p>,s	unless ($$html =~ m,<\/p>\s*$,);
 
   # Remove <p> tags around blocks that do not contain any real text,
   # and are instead just blocks of HTML tags.
@@ -702,198 +736,10 @@ sub unprotect_html {
 ###########################################################################
 
 sub markup_lists {
-  my ($self, $orightml) = @_;
-  local ($_);
-  my $html = '';
+  my ($self, $html) = @_;
 
-  # since li's and lists can be nested, these are stacks:
-  # the tag stack indicating which close tag we need to use at end of block
-  $self->{list_tag} = [ ];
-  # the indentation level of the current block, in spaces.
-  $self->{list_indent} = [ ];
-  # the optional alternative indent level for the current block.
-  # invariant: must be >= {list_indent}.
-  $self->{list_alternative_indent} = [ ];
-  # <li>'s seen in this list so far. Used to figure out if the
-  # first <p> tag should be kept or not.
-  $self->{seenitems} = 0;
-
-  # strip obsolete list-opening tags.
-  $orightml =~ s/^<(?:ul|ol|\/ul|\/ol)>//gim;
-  
-  # we need to do this line-by-line, it's a LOT easier.
-  foreach $_ (split (/\n/, $orightml)) {
-    if (s/^<p>([ \t]+)//) {
-      my ($indent, $rest) = ($1, $');
-      $indent =~ s/\t/        /g;
-      $html .= $self->indent_item_start (length ($indent), $rest, 1) . "\n";
-    }
-    elsif (s/^<\/p>//) {
-      $html .= $self->indent_item_end () . $_ . "\n";
-      if ($self->{seenitems} > 1) {
-	$html =~ s/<\/?_et_first_p_>//gs;
-      } else {
-	$html =~ s/_et_first_p_/p/gs;
-      }
-    }
-    elsif (s/^<p>::(\s)//) {
-      my $rest = '::'.$1.$';
-      my $pre = $self->indent_item_end () . "\n";
-      my $postfix = $self->indent_item_start (0, $rest, 0) . "\n";
-      $html .= $pre . $postfix;
-    }
-    elsif (/^</) {
-      $html .= $self->indent_list_end () . $_ . "\n";
-    }
-    elsif (s/^([ \t]+)([-\*\+o]|\d+\.)(\s)//) {
-      my ($indent, $rest) = ($1, $2.$3.$');
-      $indent =~ s/\t/        /g;
-      my $pre = $self->indent_item_end () . "\n";
-      my $postfix = $self->indent_item_start (length ($indent),
-      							$rest, 0) . "\n";
-      $html .= $pre . $postfix;
-    }
-    elsif (s/^::\s//) {
-      $html .= $_ . "\n";
-    }
-    else {
-      $html .= $_ . "\n";
-    }
-  }
-
-  $html .= $self->indent_item_end () . $self->indent_list_end (). "\n";
-
-  undef $self->{list_alternative_indent};
-  undef $self->{list_indent};
-  undef $self->{list_tag};
-
-  $html;
-}
-
-sub indent_item_start {
-  my ($self, $indent, $line, $hasptag) = @_;
-
-  my $listblock = undef;
-  my $closeitemtag = undef;
-  my $alt_indent = 0;
-  $self->get_current_indent_level();
-
-  my $openptag = undef;
-  my $closeptag = undef;
-
-  if ($hasptag) {
-    if ($self->{seenitems} == 0) {
-      $openptag = '<_et_first_p_>'; $closeptag = '</_et_first_p_>';
-    } else {
-      $openptag = '<p>'; $closeptag = '</p>';
-    }
-  } else {
-    $openptag = ''; $closeptag = '';
-  }
-
-  $self->{seenitems}++;
-
-  if ($line =~ s/^[-\*\+o](\s+)//) {
-    $listblock = 'ul';
-    $closeitemtag = '</li>';
-    $alt_indent = $indent+length($1)+1;
-    $line = "<li>".$openptag.$line;
-  }
-  elsif ($line =~ s/^\d+\.(\s+)//) {
-    $listblock = 'ol';
-    $closeitemtag = '</li>';
-    $alt_indent = $indent+length($1)+2;
-    $line = "<li>".$openptag.$line;
-  }
-  elsif ($line =~ s/^(.+?):\t\s*//) {		# definition lists.
-    $listblock = 'dl';
-    $closeitemtag = '</dd>';
-    $line = "<dt>$1</dt><dd>".$openptag.$line;
-  }
-  elsif ($indent == 1 || ($indent == 0 && $line =~ s/^::\s//)) {
-    $closeitemtag = '</pre>';
-    $line = "<pre>".$line;
-    $openptag = ''; $closeptag = '';
-  }
-  else {
-    $closeitemtag = '</blockquote>';
-    $line = "<blockquote>".$line;
-    $openptag = ''; $closeptag = '';
-  }
-  $self->{current_item_cls_tag} = $closeptag.$closeitemtag;
-
-  if (defined $listblock) {
-    if ($indent > $self->{curindent} && $indent != $self->{curaltindent})
-    {
-      $line = $self->push_indent_level ($listblock,
-      			$alt_indent, $indent, $line);
-    }
-    elsif ($indent < $self->{curindent}) {
-      while ($indent < $self->{curindent}) {
-	$line = $self->pop_indent_level ($self->{curbloctag}, $line);
-      }
-    }
-  }
-
-  $line;
-}
-
-sub indent_item_end {
-  my ($self) = @_;
-
-  if (defined $self->{current_item_cls_tag}) {
-    my $ret = $self->{current_item_cls_tag};
-    $self->{current_item_cls_tag} = undef;
-    return $ret;
-
-  } else {
-    return '</p>';
-  }
-}
-
-sub indent_list_end {
-  my ($self) = @_;
-  my $line = '';
-
-  $self->get_current_indent_level();
-  while (0 < $self->{curindent}) {
-    $line = $self->pop_indent_level ($self->{curbloctag}, $line);
-  }
-  $line;
-}
-
-sub get_current_indent_level {
-  my ($self) = @_;
-
-  $self->{curbloctag} = $self->{list_tag}->[0];
-  $self->{curindent} = $self->{list_indent}->[0];
-  $self->{curaltindent} = $self->{list_alternative_indent}->[0];
-
-  if (!defined $self->{curindent}) {
-    $self->{curindent} = 0;
-    $self->{curaltindent} = 0;
-    $self->{seenitems} = 0;
-  }
-}
-
-sub push_indent_level ($$$$$) {
-  my ($self, $listblock, $altindent, $indent, $line) = @_;
-
-  unshift (@{$self->{list_alternative_indent}}, $altindent);
-  unshift (@{$self->{list_indent}}, $indent);
-  unshift (@{$self->{list_tag}}, $listblock);
-  $self->get_current_indent_level();
-  "<$listblock>" . $line;
-}
-
-sub pop_indent_level {
-  my ($self, $listblock, $line) = @_;
-
-  shift (@{$self->{list_alternative_indent}});
-  shift (@{$self->{list_indent}});
-  shift (@{$self->{list_tag}});
-  $self->get_current_indent_level();
-  "</$listblock>" . $line;
+  my $lister = new Text::EtText::Lists();
+  $$html = $lister->run (split (/^/, $$html));
 }
 
 ###########################################################################

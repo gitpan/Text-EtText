@@ -2,7 +2,7 @@
 
 use lib '.'; use lib 't';
 use EtTest; ettext_t_init("ettextmarkup");
-use Test; BEGIN { plan tests => 37 };
+use Test; BEGIN { plan tests => 35 };
 
 # ---------------------------------------------------------------------------
 
@@ -10,7 +10,7 @@ use Test; BEGIN { plan tests => 37 };
   q{<em>This is protected HTML &amp; should be OK.</em><hr><hr><hr>},
   'protected',
 
-  q{<p> Non-bold again! <!--etsafe-->
+  q{<p>Non-bold again! <br /><!--etsafe-->
   <em>This is protected HTML &amp; should be OK.</em><hr><hr><hr>
   <!--/etsafe--> Still part of the Non-bold para, right?
   </p>},
@@ -45,20 +45,24 @@ use Test; BEGIN { plan tests => 37 };
     </tr></table>},
   'etright',
 
-  q{<p> This is a list: </p> <ul> <li> <p> foo </p> </li>
-  <li> <p> bar </p> </li> <li> <p> baz </p> </li> </ul>},
+  q{
+<p>This is a list:
+</p><ul>
+<ul><li>foo
+</li><li>bar
+</li><li>baz
+</li></ul></ul>
+<p>HTML
+  },
   'list',
 
-  q{<blockquote> This should be reproduced as a blockquote text segment,
+  q{<blockquote><p>This should be reproduced as a blockquote text segment,
   because it's indented.
-  </blockquote>},		# fix vim: '
+</p><p>This too.
+</p></blockquote>},		# fix vim: '
   'block1',
 
-  q{<blockquote> This too.
-  </blockquote>},
-  'block2',
-
-  q{<a name="A_H3_HEADING"><h3>A H3 HEADING</h3></a>
+  q{<a name="A_H3_HEADING" id="A_H3_HEADING"><h3>A H3 HEADING</h3></a>
   <p> Some text.
   </p>},
   'h3',
@@ -78,12 +82,13 @@ use Test; BEGIN { plan tests => 37 };
   </p>},
   'h22',
 
-  q{<blockquote> &Agrave; &Aring; &Atilde; &Auml; &Ccedil; &ETH; &Eacute;
+  q{<blockquote>&Agrave; &Aring; &Atilde; &Auml; &Ccedil; &ETH; &Eacute;
   &Ecirc; &Egrave; &Euml; &Iacute; &Icirc; &Igrave; &Iuml; &Ntilde;
   &Oacute; &Ocirc; &Ograve; &Oslash; &Otilde;
-  &Ouml; &THORN; &Uacute; &Ucirc; &Ugrave; &Uuml; &Yacute; &aacute;
+ <br />&Ouml; &THORN; &Uacute; &Ucirc; &Ugrave; &Uuml; &Yacute; &aacute;
   &acirc; &aelig; &agrave; &aring; &atilde; &auml; &ccedil; &eacute;
-  &ecirc; &egrave; &eth; &euml; &ouml; &szlig; &uuml; &yacute; &yuml;
+  &ecirc; &egrave; &eth; &euml;
+<br /> &ouml; &szlig; &uuml; &yacute; &yuml;
   &copy; &reg; &pound; &yen; &brvbar; &sect;
   </blockquote>},
   'highbits',

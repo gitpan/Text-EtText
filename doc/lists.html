@@ -7,7 +7,7 @@
     <title>
       EtText: Documentation: Lists
     </title>
-    <meta name="generator" content="WebMake/2.1" />
+    <meta name="generator" content="WebMake/2.2" />
     <style>
       body {
        background-color: #ffffff; 
@@ -56,7 +56,7 @@
         <tr>
           <td valign="top">
             <strong><a href="http://ettext.taint.org/">EtText</a>
-             Documentation</strong> (version 2.1)
+             Documentation</strong> (version 2.2)
              
           </td>
           <td valign="top">
@@ -89,11 +89,11 @@
                         </p>
                         <p>
                           The same goes for indented paragraphs that start with the string
-                          <code>1.</code>, followed by whitespace. However the default list tag in this
-                          case will be an <strong>&lt;ol&gt;</strong>...<strong>&lt;/ol&gt;</strong> list. Any positive integer
-                          followed immediately by a full stop and a space will do the trick. (BTW: I
-                          used to use <code>#</code> to do this, but I preferred the <a href="http://c2.com/cgi/wiki?WikiWikiWeb">WikiIdea</a>, it
-                          looks better.)
+                          <code>1.</code>, <code>a.</code>, <code>A.</code>, <code>1)</code>, <code>A)</code>, or <code>a)</code>, followed by
+                          whitespace. However the default list tag in this case will be an
+                          <strong>&lt;ol&gt;</strong>...<strong>&lt;/ol&gt;</strong> list. Any positive integer followed
+                          immediately by a full stop and a space will do the trick. The <strong>&lt;ol&gt;</strong>
+                          tag will use the correct <strong>type</strong> attribute to match the indexing you're using.
                           
                         </p>
                         <blockquote>
@@ -104,14 +104,15 @@
                           </p>
                         </blockquote>
                         <p>
-                          Some text editors (such as <em>vim</em>) will reformat list items automatically,
-                          assuming that you want the text to line up with the start of the text, instead
-                          of the bullet-point character, on the previous line, like so:
+                          When you're writing <strong>&lt;ul&gt;</strong> lists, note that some text editors (such as
+                          <em>vim</em>) will reformat list items automatically, assuming that you want the
+                          text to line up with the start of the text, instead of the bullet-point
+                          character, on the previous line, like so:
                           
                         </p>
                         <p>
                           <pre>
-                          
+
     - this is a list item. We should make sure that
       blah blah etc. etc.
                         </pre>
@@ -128,13 +129,13 @@
                         
                       </p>
                       <p>
-                        <pre>
                         <!--etsafe-->
-                        
+                        <pre>
+
     Foo:	Blah blah blah etc.
+                      </pre>
 <!--/etsafe-->
-                                              </pre>
-                    </p>
+                                          </p>
                     <p>
                       Will look like this:
                       
@@ -167,7 +168,7 @@
   <tr>
     <td valign="top">
       <strong><a href="http://ettext.taint.org/">EtText</a>
-       Documentation</strong> (version 2.1)
+       Documentation</strong> (version 2.2)
        
     </td>
     <td valign="top">

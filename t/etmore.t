@@ -8,7 +8,8 @@ use Test; BEGIN { plan tests => 17 };
 
 %patterns = (
 
-  q{<blockquote> &lt;type attribute=val ...&gt; &lt;/type&gt;
+  q{<blockquote>&lt;type attribute=val ...&gt;
+<br />&lt;/type&gt;
    </blockquote>},
   'no_format_bug',
 
@@ -16,11 +17,18 @@ use Test; BEGIN { plan tests => 17 };
    <em><a href="http://url">http://url</a>...</em> </blockquote>},
   'no_ettext_link_bug',
 
-  q{Test of lists right beside one another.  </p> <ul> <li>
-  a list item </li> <li> another </li> <li>
-  and another. This one's a bit longer though... blah blah blah
-   foo blah etc blah </li> <ul> <li> nest 'em!  </li> <li>
-  again </li> </ul> <li> and back.  </li> </ul>},
+  q{
+<p>Test of lists right beside one another.
+</p><ul><li>a list item
+</li><li>another
+</li><li>and another. This one's a bit longer though... blah blah blah
+foo blah etc blah
+<ul><li>nest 'em!
+</li><li>again
+</li></ul></li><li>and back.
+</li></ul><hr />
+
+  },
   'ettext_sardine_lists',
 
   q{<h2>Title right at top of page</h2>},
@@ -32,8 +40,13 @@ use Test; BEGIN { plan tests => 17 };
   q{ <hr /> <p> That was a HR. so is this: </p> <hr /> },
   'hrs_at_top',
 
-  q{Another PRE test: </p> <pre> Bar [foo] Baz </pre>
-  <p> Could you see the square brackets},
+  q{Another PRE test:
+</p><p><pre>
+        Bar
+        [foo]
+        Baz
+</pre>
+</p><p>Could you see the square brackets},
   'pre_sq_brackets',
 
   q{Balanced tags: <b>test</b>. <span class="green">foo</span>. <i

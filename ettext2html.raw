@@ -1,8 +1,11 @@
 #!/usr/bin/perl -w
 
+use lib 'lib';
+use lib '../lib';
+
 use FindBin;
 BEGIN {
-  # This code will track down the directories where WebMake
+  # This code will track down the directories where EtText
   # keeps its modules, portably, so it'll work on Macs, UNIX and Win32,
   # with or without a UNIX-style "make install" installation.
   # Sadly, we can't rely on File::Spec to do the slash-twiddling for us;
@@ -18,11 +21,9 @@ BEGIN {
     $slash = '\\';
   }
 
-  # first, find the common candidates: "lib" and "site_perl" in
+  # first, find the common candidates: "lib" in
   # the same dir as the script. These are likely on all platforms.
   $_ = $bin.$slash. "lib" . $dirtrailer;
-  push (@INC, $_);
-  $_ = $bin.$slash. "site_perl" . $dirtrailer;
   push (@INC, $_);
 
   # next, support UNIX-style /usr-based installation, where the
@@ -30,14 +31,10 @@ BEGIN {
   # or /usr/*/share. This only happens on UNIX afaik.
   if ($slash eq '/') {
     $_ = $bin . "/../lib/ettext";
-    if (-d $_) {
-      push (@INC, "$_/lib"); push (@INC, "$_/site_perl");
-    }
+    if (-d $_) { push (@INC, "$_/lib"); }
 
     $_ = $bin . "/../share/ettext";
-    if (-d $_) {
-      push (@INC, "$_/lib"); push (@INC, "$_/site_perl");
-    }
+    if (-d $_) { push (@INC, "$_/lib"); }
   }
 }
 

@@ -2,59 +2,80 @@
 
 use lib '.'; use lib 't';
 use EtTest; ettext_t_init("etlists");
-use Test; BEGIN { plan tests => 21 };
+use Test; BEGIN { plan tests => 17 };
 
 # ---------------------------------------------------------------------------
 
 %patterns = (
 
-  q{Checking lists with no start-end tags. 
-  </p> <ul> <li> <p> list 1 </p> </li> <li> <p> l1 i2 </p> </li>
-  <li> <p> l1 i3 </p> </li> </ul> <p> Next! I prefer this one I think. },
+  q{
+  <p>Checking lists with no start-end tags.
+</p><ul><li>list 1
+</li><li>l1 i2
+</li><li>l1 i3
+</li></ul><p>Next!
+   },
   'simple_ul',
 
-  q{Next! I prefer this one I think.  </p> <ol> <li> <p> foo </p> </li>
-  <li> <p> bar </p> </li> <li> <p> baz </p> </li> </ol> <p>
-  How about definition lists? },
+  q{
+Next! I prefer this one I think.
+</p><ol type="1"><li>foo
+</li><li>bar
+</li><li>baz
+</li></ol><p>How
+   },
   'simple_ol',
 
-  q{How about definition lists?  </p> <dl> <dt> Foo </dt> <dd> <p> a random term 
-   </p> </dd> <dt> Bar </dt> <dd> <p> yet another </p> </dd> <dt> Baz </dt>
-   <dd> <p> you get the idea.  </p> </dd> </dl> <p> That},
+  q{
+<p>How about definition lists?
+</p><dl><dt>Foo</dt><dd>a random term
+</dd><dt>Bar</dt><dd>yet another
+</dd><dt>Baz</dt><dd>you get the idea.
+</dd></dl><p>What
+   },
   'defn_list',
 
-  q{Checking lists with included start-end tags.  </p>
-  <ul> <li> <p> list 1 </p> </li> <li> <p> l1 i2 </p> </li> <li> <p>
-  l1 i3 </p> </li> </ul> <p> Next! I prefer this one I think. },
-  'included_ul',
-
-  q{Next! I prefer this one I think.  </p> <ol> <li> <p> foo </p>
-  </li> <li> <p> bar </p> </li> <li> <p> baz </p> </li> </ol> <p>
-  What about indented lists? },
-  'included_ol',
-
-  q{What about indented lists?  </p> <ul> <li> <p> list 1 </p>
-  </li> <li> <p> l1 i2 </p> </li> <ul> <li> <p> l2 i1 </p> </li> <li> <p>
-  l2 i2 </p> </li> </ul> <li> <p> l1 i3 </p> </li> <li> <p> l1 i4 
-  </p> </li> <ol> <li> <p> ol2 i1 </p> </li> <li> <p> ol2 i2 </p> </li>
-  </ol> <li> <p> l1 i5 </p> </li> </ul> <p> Tricky indented list },
+  q{
+<p>What about indented lists?
+</p><ul><li>list 1
+</li><li>l1 i2
+<ul><li>l2 i1
+</li><li>l2 i2
+</li></ul></li><li>l1 i3
+</li><li>l1 i4
+<ol type="1"><li>ol2 i1
+</li><li>ol2 i2
+</li></ol></li><li>l1 i5
+</li></ul><p>Tricky indented list
+   },
   '2lists_1',
 
-  q{Tricky indented list -- it has 3 levels, and the innermost falls back
-  to the outermost. Ouch.  </p>
-  <ul> <li> <p> l1 i2 </p> </li> <ul> <li> <p> l2 i1 </p> </li> <li>
-  <p> l2 i2 </p> </li> <ul> <li> <p> l3 i1 </p> </li> <li> <p> l3 i2 
-  </p> </li> <li> <p> l3 i3 </p> </li> </ul> </ul> <li> <p> l1 i3 
-  </p> </li> </ul> <p> That},
+  q{
+Tricky indented list -- it has 3 levels, and the innermost falls ba
+ck
+to the outermost. Ouch.
+</p><ul><li>l1 i2
+<ul><li>l2 i1
+</li><li>l2 i2
+<ul><li>l3 i1
+</li><li>l3 i2
+</li><li>l3 i3
+</li></ul></li></ul></li><li>l1 i3
+</li></ul><p>That's the lot
+  },
   '3lists_1',
 
-  q{the lot then. Oh, one more -- end on an EOF.  </p> <ul><li><p>foo </p></li> </ul><p>},
+  q{
+<p>That's the lot then. Oh, one more -- end on an EOF.
+</p><ul><li>foo
+</li></ul><p>I lied
+},
   'end_on_eof',
 
   q{Lists where the items are right next to one another...  </p>
    <ul> <li> foo </li> <li> bar </li> <li> baz </li> <li> glorp 
-   </li> <li> <p> with a paragraph break </p> </li> <li> <p> and another. 
-   </p> </li> </ul>},
+   </li> <li> with a paragraph break </li> <li> and another. 
+   </li> </ul>},
   'tight_lists',
 
   q{</ul><p>And where they look like they do on-screen in HTML:
@@ -69,8 +90,8 @@ use Test; BEGIN { plan tests => 21 };
   <li>glorp2
   </li>
 
-  <li><p>withpara 2
-  </p></li>
+  <li>withpara 2
+  </li>
 
   </ul><p>that's it.}, 'tight_lists_2',
 

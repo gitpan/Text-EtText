@@ -122,8 +122,9 @@ to **&amp;amp;** signs automatically.
 
 Text indented from the left margin will be converted into a **&lt;P&gt;**
 paragraph wrapped in a **&lt;blockquote&gt;** -- unless it starts with a
-<code>*</code>, <code>-</code>, <code>+</code> or <code>o</code> character
-followed by whitespace, in which case it's interpreted as a list item; see <a
+<code>*</code>, <code>-</code>, <code>+</code>, <code>o</code> character
+followed by whitespace, or is numbered -- <code>1.</code>, ##A)## or ##a.##,
+etc. -- in which case it's interpreted as a list item; see <a
 href=$(lists)>Lists</a> below.
 
 Another exception to the above rule is that text indented by only 1 space, or
@@ -157,6 +158,8 @@ will be rendered as
 
 	##&lt;i class="green&gt;foo&lt;/i&gt;##
 
+Mail headers, and mail messages, are now marked up automatically.
+
 </content>
 <content name="lists.txt" format="text/et">
 <wmmeta name="Title" value="Lists" />
@@ -172,19 +175,20 @@ and starting with a <code>*</code>, <code>-</code>, <code>+</code> or
 item (**&lt;li&gt;** tag).
 
 The same goes for indented paragraphs that start with the string
-<code>1.</code>, followed by whitespace.  However the default list tag in this
-case will be an **&lt;ol&gt;**...**&lt;/ol&gt;** list.  Any positive integer
-followed immediately by a full stop and a space will do the trick.  (BTW: I
-used to use <code>#</code> to do this, but I preferred the WikiIdea [wiki], it
-looks better.)
+<code>1.</code>, ##a.##, ##A.##, ##1)##, ##A)##, or ##a)##, followed by
+whitespace.  However the default list tag in this case will be an
+**&lt;ol&gt;**...**&lt;/ol&gt;** list.  Any positive integer followed
+immediately by a full stop and a space will do the trick.  The **&lt;ol&gt;**
+tag will use the correct **type** attribute to match the indexing you're using.
 
 	__(Compatibility note: previous versions of EtText required that the
 	**&lt;ul&gt;** or **&lt;ol&gt;** tags be written manually. This is no
 	longer the case, they will be added automatically.)__
 
-Some text editors (such as __vim__) will reformat list items automatically,
-assuming that you want the text to line up with the start of the text, instead
-of the bullet-point character, on the previous line, like so:
+When you're writing **&lt;ul&gt;** lists, note that some text editors (such as
+__vim__) will reformat list items automatically, assuming that you want the
+text to line up with the start of the text, instead of the bullet-point
+character, on the previous line, like so:
 
 <pre>
     - this is a list item. We should make sure that
@@ -255,16 +259,61 @@ specification used in HTML, EtText will automatically add href tags for URLs
 and email addresses  that occur in the text.  In addition, EtText supports its
 own link format, as follows.
 
-The basic concept is of a word or ''quoted set of words'' followed by an
-optional link label in &etsqi;square brackets&etsqo;, like this: **''this is a
-link'' &etsqi;label&etsqo;**.
+To use labelled links, you surround the link text with double-square-brackets,
+and (optionally) use a single open-square-bracket on the right-hand side with
+the link label.
+
+Here's an example:
+
+<safe>
+  WebMake's home page is [[at this website [WebMake]].
+</safe>
+
+Alternatively, if the link text matches the link label, the link label is
+optional.
+
+<safe>
+  Here's an example: [[WebMake]].
+</safe>
 
 The href used in the link is then defined at another point in the document, as
 an indented line like this:
 
 <safe>
-  label: http://url
+	[WebMake]: http://webmake.taint.org/
 </safe>
+
+Even simpler: if the link label has been set as an <a
+href=#Auto_Links_Even_More_Convenient>Auto link</a>, you can omit the square
+brackets altogether:
+
+<safe>
+  Here's an example: WebMake.
+</safe>
+
+Text and markup can be enclosed in the double-square-brackets, everything
+quoted will become part of the link text.  Unlike the older form of EtText
+links (see below), even single words need to be enclosed in brackets
+to become links.  This protects against accidentally interpreting normal
+text as a broken link.
+
+EtText Linking, Backwards Compatibility
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following text describes the old style for EtText links.  Since it
+was way too easy to produce links this way where they were not intended
+to be, it has now been obsoleted by the method described above.  However,
+support for it will remain on by default for a few revisions.
+
+To turn off this backwards compatibility, set the **EtTextOldLinkStyle** option
+to 0, either using WebMake's &lt;option&gt; tag, or from your code.
+
+The basic concept is of a word or ''quoted set of words'' followed by an
+optional link label in &etsqi;square brackets&etsqo;, like this: **''this is a
+link'' &etsqi;label&etsqo;**.
+
+The href used in the link is then defined at another point in the document, as
+above.
 
 Text and markup can be enclosed in the quotes, everything quoted will become
 part of the link text. Single words or HTML tags do not need to be quoted, so
@@ -279,31 +328,32 @@ Glossary Links
 ~~~~~~~~~~~~~~
 
 EtText also supports a concept called __glossary links__; if you define a link,
-the name of that link will automatically become a href if enclosed in quotes.
-For example:
+the name of that link will automatically become a href if enclosed in
+double-square-brackets or quotes.  For example:
 
 <safe>
   [Justin Mason]: http://jmason.org/
 </safe>
 
-will mean that any occurrence of the name **''Justin Mason''**, in quotes, in
-__any__ EtText content chunk or file in the site, becomes a link to that
-address.
+will mean that any occurrence of **&etsqi;&etsqi;Justin Mason]]**, or
+**''Justin Mason''**, in __any__ EtText content chunk or file in the
+site, becomes a link to that address.
 
-These links are stored in the WebMake cache file, if WebMake is being used.
-Alternatively, if you are using the Text::EtText modules yourself, provide an
-implementation of the **Text::EtText::LinkGlossary** interface to support this.
+    These links are stored in the WebMake cache file, if WebMake is being used.
+    If you use EtText in a standalone mode, without WebMake, you can provide an
+    implementation of the **Text::EtText::LinkGlossary** interface to store
+    defined links so that they can be used in other EtText files.
 
 Quoted bits of text that do not map to an entry in the glossary are not
 converted to links (unless they're followed by a square-bracketed link-label
 reference).
 
-More Convenient Links
+Auto Links - Even More Convenient
 ~~~~~~~~~~~~~~~~~~~~~
 
 In addition, if the link definition is preceded with ##Auto:##, the quotes are
-not required, and any occurrence of the words in the link label, with or
-without quotes, will become a link.
+not required, and any occurrence of the link label -- with or without quotes or
+double-square-brackets -- will become a link.
 
 <safe>
   Auto: [WebMake]: http://webmake.taint.org/
@@ -346,6 +396,12 @@ Yes, 1993. Setext has been around for a while!
 
 WikiWikiWeb [wiki] is quite a recent, well-established system which uses
 a similar markup style.
+
+txt2html provided a lot of impetus to rewrite the core of EtText since 2.0,
+since its list-parsing engine was __much__ better.  However EtText is now up to
+scratch again ;)
+
+	Auto: [txt2html]: http://www.aigeek.com/txt2html/
 
 The real inspiration for EtText was Userland's Frontier [frontier]; Dave
 Winer's evangelisation of its easily-editable markup system convinced me that
@@ -434,7 +490,10 @@ EtText or HTML.
 <metadefault name="score"	value="50">
 
 <metadefault name="section"	value="08-pod">
-<contents src="../lib/Text/EtText" name="*.pm" />
+<contents src="../lib/Text/EtText" name="EtText2HTML.pm" />
+<contents src="../lib/Text/EtText" name="HTML2EtText.pm" />
+<contents src="../lib/Text/EtText" name="LinkGlossary.pm" />
+<contents src="../lib/Text/EtText" name="DefaultGlossary.pm" />
 </metadefault>
 
 <metadefault name="section"	value="09-man">

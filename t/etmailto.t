@@ -8,20 +8,27 @@ use Test; BEGIN { plan tests => 7 };
 
 %patterns = (
 
- q{mailto links: <a
-href="mailto:jm@nospam-jmason.org">mailto:jm@nospam-jmason.org</a> ,
-mailto followed by a non-mail char: <a
-href="mailto:jm@nospam-jmason.org,">mailto:jm@nospam-jmason.org,</a> and
-bare email addresses: <a
-href="mailto:jm@nospam-jmason.org">jm@nospam-jmason.org</a>.}, 'first',
+ q{ <p>mailto links: <a
+ href="mailto:jm@nospam-jmason.org">mailto:jm@nospam-jmason.o rg</a> </p><p>,
+ mailto followed by a non-mail char: <br /><a
+ href="mailto:jm@nospam-jmason.org">mailto:jm@nospam-jmason.org</a>, </p><p>and
+ bare email addresses: <a
+ href="mailto:jm@nospam-jmason.org">jm@nospam-jmason.org</a>.
 
-q{ <p> <a href="mailto:test@test.org">test@test.org</a> <a
-href="mailto:test@test.org">test@test.org</a> <a
-href="mailto:test@test.org">mailto:test@test.org</a> }, 'second',
+}, 'first',
 
-q{<a href=mailto:test@test.org>test@test.org</a> <a
-href="mailto:test@test.org">test@test.org</a> <a
-href='mailto:test@test.org'>test@test.org</a> }, 'third'
+q{
+</p><p><a href="mailto:test@test.org">test@test.org</a> <a href="mailto:test@tes
+t.org">test@test.org</a> <a href="mailto:test@test.org">mailto:test@test.org</a>
+</p>
+ }, 'second',
+
+q{
+<p><a href=mailto:test@test.org>test@test.org</a>
+<a href="mailto:test@test.org">test@test.org</a>
+<a href='mailto:test@test.org'>test@test.org</a>
+</p>
+ }, 'third'
 
 );
 

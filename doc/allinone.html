@@ -5,9 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <title>
-      EtText: Documentation: All-In-One Documentation
+      EtText: Documentation: Contents
     </title>
-    <meta name="generator" content="WebMake/2.1" />
+    <meta name="generator" content="WebMake/2.2" />
     <style>
       body {
        background-color: #ffffff; 
@@ -55,8 +55,8 @@
       <table width="100%">
         <tr>
           <td valign="top">
-            <strong><a href="http://ettext.taint.org/">EtText</a>
-             Documentation</strong> (version 2.1)
+             <strong><a href="http://ettext.taint.org/">EtText</a>
+             Documentation</strong> (version 2.2)
              
           </td>
           <td valign="top">
@@ -80,9 +80,9 @@
                   <table border="0" cellspacing="4" cellpadding="4" width="100%">
                     <tr>
                       <td>
-                        <h2>All-In-One Documentation</h2><h1>Contents</h1><ul>
+                         <h2>Contents</h2> <h1>Contents</h1><ul>
                           <li>
-                            <h2>Introduction</h2><ul>
+                             <h2>Introduction</h2><ul>
                               <li>
                                 <p>
                                   <a href="blurb.html">The Blurb</a> - What it is, and what it does
@@ -96,7 +96,7 @@
                             </ul>
                           </li>
                           <li>
-                            <h2>Reference</h2><ul>
+                             <h2>Reference</h2><ul>
                               <li>
                                 <p>
                                   <a href="ettext.html">Using EtText</a> - The basics of using EtText
@@ -130,7 +130,7 @@
                             </ul>
                           </li>
                           <li>
-                            <h2>Module Documentation</h2><ul>
+                             <h2>Module Documentation</h2><ul>
                               <li>
                                 <p>
                                   <a href="DefaultGlossary.pm.html">Text::EtText::DefaultGlossary</a> - module documentation
@@ -154,7 +154,7 @@
                             </ul>
                           </li>
                           <li>
-                            <h2>Manual Pages</h2><ul>
+                             <h2>Manual Pages</h2><ul>
                               <li>
                                 <p>
                                   <a href="ethtml2text.html">ethtml2text(1)</a> - manual page
@@ -169,7 +169,7 @@
                           </li>
                         </ul>
                         <hr />
-                        <h1>The Blurb</h1><p>
+                         <h1>The Blurb</h1><p>
                           EtText is a simple plain-text format which allows conversion to and from HTML.
                           Instead of editing HTML directly, it provides an easy-to-edit, easy-to-read and
                           intuitive way to write HTML, based on the plain-text markup conventions we've
@@ -177,14 +177,14 @@
                           
                         </p>
                         <p>
-                          Like most simple text markup formats (POD, <a href="http://www.bsdi.com/setext/">setext</a>, etc.), EtText markup handles
+                          Like most simple text markup formats (POD, setext, etc.), EtText markup handles
                           the usual things: insertion of P tags, header recognition and markup. However
                           it also adds a powerful link markup system.
                           
                         </p>
                         <p>
-                          EtText markup is simple and effective; it's very similar to <a href="http://www.bsdi.com/setext/">setext</a>, WikiWikiWeb
-                          TextFormattingRules or Zope's <a href="http://dev.zope.org/Wikis/DevSite/Proposals/StructuredText">StructuredText</a>.
+                          EtText markup is simple and effective; it's very similar to setext, WikiWikiWeb
+                          TextFormattingRules or Zope's StructuredText.
                           
                         </p>
                         <p>
@@ -239,15 +239,15 @@
                       </p>
                       <hr />
                       <h1>Using EtText</h1><p>
-                        Like most simple text markup formats (POD, setext, etc.), EtText markup
+                        Like most simple text markup formats (POD, <a href="http://www.bsdi.com/setext/">setext</a>, etc.), EtText markup
                         handles the usual things: insertion of <em>&lt;P&gt;</em> tags, header
                         recognition and markup. However it adds a powerful link markup system
                         and several other useful features.
                         
                       </p>
                       <p>
-                        EtText markup is simple and effective; it's based loosely on setext, with bits
-                        of <a href="http://c2.com/cgi/wiki?WikiWikiWeb">WikiWikiWeb</a><a href="http://c2.com/cgi/wiki?TextFormattingRules">TextFormattingRules</a> thrown in.
+                        EtText markup is simple and effective; it's based loosely on <a href="http://www.bsdi.com/setext/">setext</a>, with bits
+                        of <a href="http://c2.com/cgi/wiki?WikiWikiWeb">WikiWikiWeb</a> <a href="http://c2.com/cgi/wiki?TextFormattingRules">TextFormattingRules</a> thrown in.
                         
                       </p>
                       <p>
@@ -255,7 +255,7 @@
                         as a standalone component.
                         
                       </p>
-                      <a name="Basic_Text_Markup"><h3>Basic Text Markup</h3></a><p>
+                       <a name="Basic_Text_Markup"><h3>Basic Text Markup</h3></a><p>
                         If you leave blank lines between paragraphs, <strong>&lt;p&gt;</strong> and
                         <strong>&lt;/p&gt;</strong> tags will be inserted in the correct places.
                         EtText does quite a good job of this.
@@ -335,8 +335,9 @@
                       <p>
                         Text indented from the left margin will be converted into a <strong>&lt;P&gt;</strong>
                         paragraph wrapped in a <strong>&lt;blockquote&gt;</strong> -- unless it starts with a
-                        <code>*</code>, <code>-</code>, <code>+</code> or <code>o</code> character
-                        followed by whitespace, in which case it's interpreted as a list item; see <a href="lists.html">Lists</a> below.
+                        <code>*</code>, <code>-</code>, <code>+</code>, <code>o</code> character
+                        followed by whitespace, or is numbered -- <code>1.</code>, <code>A)</code> or <code>a.</code>,
+                        etc. -- in which case it's interpreted as a list item; see <a href="lists.html">Lists</a> below.
                         
                       </p>
                       <p>
@@ -393,6 +394,10 @@
                         </p>
                       </blockquote>
                       <p>
+                        Mail headers, and mail messages, are now marked up automatically.
+                        
+                      </p>
+                      <p>
                         
                       </p>
                     </p>
@@ -406,11 +411,11 @@
                     </p>
                     <p>
                       The same goes for indented paragraphs that start with the string
-                      <code>1.</code>, followed by whitespace. However the default list tag in this
-                      case will be an <strong>&lt;ol&gt;</strong>...<strong>&lt;/ol&gt;</strong> list. Any positive integer
-                      followed immediately by a full stop and a space will do the trick. (BTW: I
-                      used to use <code>#</code> to do this, but I preferred the <a href="http://c2.com/cgi/wiki?WikiWikiWeb">WikiIdea</a>, it
-                      looks better.)
+                      <code>1.</code>, <code>a.</code>, <code>A.</code>, <code>1)</code>, <code>A)</code>, or <code>a)</code>, followed by
+                      whitespace. However the default list tag in this case will be an
+                      <strong>&lt;ol&gt;</strong>...<strong>&lt;/ol&gt;</strong> list. Any positive integer followed
+                      immediately by a full stop and a space will do the trick. The <strong>&lt;ol&gt;</strong>
+                      tag will use the correct <strong>type</strong> attribute to match the indexing you're using.
                       
                     </p>
                     <blockquote>
@@ -421,800 +426,860 @@
                       </p>
                     </blockquote>
                     <p>
-                      Some text editors (such as <em>vim</em>) will reformat list items automatically,
-                      assuming that you want the text to line up with the start of the text, instead
-                      of the bullet-point character, on the previous line, like so:
+                      When you're writing <strong>&lt;ul&gt;</strong> lists, note that some text editors (such as
+                      <em>vim</em>) will reformat list items automatically, assuming that you want the
+                      text to line up with the start of the text, instead of the bullet-point
+                      character, on the previous line, like so:
                       
                     </p>
                     <p>
                       <pre>
-                      
     - this is a list item. We should make sure that
       blah blah etc. etc.
-                    </pre>
+</pre>
+                    </p>
+                    <p>
+                      This is pretty handy, so using a <code>-</code> as the list bullet point character is
+                      recommended.
+                      
+                    </p>
+                    <p>
+                      Indented paragraphs that start with <code><strong>term</strong>:</code> <em>tab</em> <code><strong>rest
+                      of paragraph</strong></code> will be converted into definition lists (this is another
+                      <a href="http://c2.com/cgi/wiki?WikiWikiWeb">StolenFromWikiIdea</a>). As a result, this:
+                      
+                    </p>
+                    <p>
+                      <!--etsafe-->
+                      <pre>
+    Foo:	Blah blah blah etc.
+</pre><!--/etsafe-->
+                      
+                    </p>
+                    <p>
+                      Will look like this:
+                      
+                    </p>
+                    <dl>
+                      <dt>
+                        Foo
+                      </dt>
+                      <dd>
+                        <p>
+                          Blah blah blah etc.
+                          
+                        </p>
+                      </dd>
+                    </dl>
+                    <p>
+                      
+                    </p>
                   </p>
-                  <p>
-                    This is pretty handy, so using a <code>-</code> as the list bullet point character is
-                    recommended.
-                    
-                  </p>
-                  <p>
-                    Indented paragraphs that start with <code><strong>term</strong>:</code><em>tab</em><code><strong>rest
-                    of paragraph</strong></code> will be converted into definition lists (this is another
-                    <a href="http://c2.com/cgi/wiki?WikiWikiWeb">StolenFromWikiIdea</a>). As a result, this:
+                  <hr />
+                  <h1>Sidebars and Side Images</h1><p>
+                    If you wish to display an image, or small sidebar, beside a paragraph of text,
+                    use the <strong>&lt;etleft&gt;</strong> and <strong>&lt;etright&gt;</strong>
+                    tags. These are rendered as a one-row, two-column
+                    <strong>&lt;table&gt;</strong> wrapping the paragraph and the sidebar, as
+                    follows:
                     
                   </p>
                   <p>
                     <pre>
-                    <!--etsafe-->
+  &lt;etleft&gt;&lt;img src=bubba.png&gt;&lt;/etleft&gt;This is the main
+  paragraph body.  Foo bar baz blah blah blah etc.
+</pre>
+                  </p>
+                  <p>
+                    Is displayed as:
                     
-    Foo:	Blah blah blah etc.
-<!--/etsafe-->
-                                      </pre>
+                  </p>
+                  <table>
+                    <tr>
+                      <td valign="top">
+                        <img src="bubba.png"  width="110" height="70" />
+                      </td>
+                      <td width="99%" valign="top">
+                        <p>
+                          This is the main paragraph body.
+                          Foo bar baz blah blah blah etc.
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                  <p>
+                    <pre>
+  &lt;etright&gt;&lt;img src=bubba.png&gt;&lt;/etright&gt;This is the
+  main paragraph body.  Foo bar baz blah blah blah etc.
+</pre>
+                  </p>
+                  <p>
+                    Is displayed as:
+                    
+                  </p>
+                  <table>
+                    <tr>
+                      <td width="99%" valign="top">
+                        <p>
+                          This is the main paragraph body.
+                          Foo bar baz blah blah blah etc.
+                        </p>
+                      </td>
+                      <td valign="top">
+                        <img src="bubba.png"  width="110" height="70" />
+                      </td>
+                    </tr>
+                  </table>
                 </p>
-                <p>
-                  Will look like this:
+                <hr />
+                <h1>Links in EtText</h1><p>
+                  As well as the standard <strong>&lt;a href=url&gt;...&lt;/a&gt;</strong> link
+                  specification used in HTML, EtText will automatically add href tags for URLs
+                  and email addresses that occur in the text. In addition, EtText supports its
+                  own link format, as follows.
                   
                 </p>
-                <dl>
-                  <dt>
-                    Foo
-                  </dt>
-                  <dd>
-                    <p>
-                      Blah blah blah etc.
-                      
-                    </p>
-                  </dd>
-                </dl>
+                <p>
+                  To use labelled links, you surround the link text with double-square-brackets,
+                  and (optionally) use a single open-square-bracket on the right-hand side with
+                  the link label.
+                  
+                </p>
+                <p>
+                  Here's an example:
+                  
+                </p>
+                <p>
+                  <!--etsafe-->
+                  <pre>
+  WebMake's home page is &#91;&#91;at this website &#91;WebMake&#93;&#93;.
+</pre><!--/etsafe-->
+                  
+                </p>
+                <p>
+                  Alternatively, if the link text matches the link label, the link label is
+                  optional.
+                  
+                </p>
+                <p>
+                  <!--etsafe-->
+                  <pre>
+  Here's an example: &#91;&#91;WebMake&#93;&#93;.
+</pre><!--/etsafe-->
+                  
+                </p>
+                <p>
+                  The href used in the link is then defined at another point in the document, as
+                  an indented line like this:
+                  
+                </p>
+                <p>
+                  <!--etsafe-->
+                  <pre>
+	&#91;WebMake&#93;: http://webmake.taint.org/
+</pre><!--/etsafe-->
+                  
+                </p>
+                <p>
+                  Even simpler: if the link label has been set as an <a href="#Auto_Links_Even_More_Convenient">Auto link</a>, you can omit the square
+                  brackets altogether:
+                  
+                </p>
+                <p>
+                  <!--etsafe-->
+                  <pre>
+  Here's an example: WebMake.
+</pre><!--/etsafe-->
+                  
+                </p>
+                <p>
+                  Text and markup can be enclosed in the double-square-brackets, everything
+                  quoted will become part of the link text. Unlike the older form of EtText
+                  links (see below), even single words need to be enclosed in brackets
+                  to become links. This protects against accidentally interpreting normal
+                  text as a broken link.
+                  
+                </p>
+                 <a name="EtText_Linking_Backwards_Compatibility"><h3>EtText Linking, Backwards Compatibility</h3></a><p>
+                  The following text describes the old style for EtText links. Since it
+                  was way too easy to produce links this way where they were not intended
+                  to be, it has now been obsoleted by the method described above. However,
+                  support for it will remain on by default for a few revisions.
+                  
+                </p>
+                <p>
+                  To turn off this backwards compatibility, set the <strong>EtTextOldLinkStyle</strong> option
+                  to 0, either using <a href="http://webmake.taint.org/">WebMake</a>'s &lt;option&gt; tag, or from your code.
+                  
+                </p>
+                <p>
+                  The basic concept is of a word or "quoted set of words" followed by an
+                  optional link label in [square brackets], like this: <strong>"this is a
+                  link" [label]</strong>.
+                  
+                </p>
+                <p>
+                  The href used in the link is then defined at another point in the document, as
+                  above.
+                  
+                </p>
+                <p>
+                  Text and markup can be enclosed in the quotes, everything quoted will become
+                  part of the link text. Single words or HTML tags do not need to be quoted, so
+                  
+                </p>
+                <p>
+                  <!--etsafe-->
+                  <pre>
+  &lt;img src="/license_plate.jpg" width="10" height="10"&gt; &#91;homepage&#93;
+</pre><!--/etsafe-->
+                  
+                </p>
+                <p>
+                  will work correctly.
+                  
+                </p>
+                 <a name="Glossary_Links"><h3>Glossary Links</h3></a><p>
+                  EtText also supports a concept called <em>glossary links</em>; if you define a link,
+                  the name of that link will automatically become a href if enclosed in
+                  double-square-brackets or quotes. For example:
+                  
+                </p>
+                <p>
+                  <!--etsafe-->
+                  <pre>
+  &#91;Justin Mason&#93;: http://jmason.org/
+</pre><!--/etsafe-->
+                  
+                </p>
+                <p>
+                  will mean that any occurrence of <strong>[[Justin Mason]]</strong>, or
+                  <strong>"Justin Mason"</strong>, in <em>any</em> EtText content chunk or file in the
+                  site, becomes a link to that address.
+                  
+                </p>
+                <blockquote>
+                  <p>
+                    These links are stored in the <a href="http://webmake.taint.org/">WebMake</a> cache file, if <a href="http://webmake.taint.org/">WebMake</a> is being used.
+                     If you use EtText in a standalone mode, without <a href="http://webmake.taint.org/">WebMake</a>, you can provide an
+                     implementation of the <strong>Text::EtText::LinkGlossary</strong> interface to store
+                     defined links so that they can be used in other EtText files.
+                    
+                  </p>
+                </blockquote>
+                <p>
+                  Quoted bits of text that do not map to an entry in the glossary are not
+                  converted to links (unless they're followed by a square-bracketed link-label
+                  reference).
+                  
+                </p>
+                 <a name="Auto_Links_Even_More_Convenient"><h3>Auto Links - Even More Convenient</h3></a><p>
+                  In addition, if the link definition is preceded with <code>Auto:</code>, the quotes are
+                  not required, and any occurrence of the link label -- with or without quotes or
+                  double-square-brackets -- will become a link.
+                  
+                </p>
+                <p>
+                  <!--etsafe-->
+                  <pre>
+  Auto: &#91;WebMake&#93;: http://webmake.taint.org/
+  Auto: &#91;any occurrence of the words&#93;: http://webmake.taint.org/
+</pre><!--/etsafe-->
+                  
+                </p>
+                 <a name="URLs_and_Email_Addresses"><h3>URLs and Email Addresses</h3></a><p>
+                  URLs, such as <a href="http://webmake.taint.org/">http://webmake.taint.org/</a> , and email addresses, such as
+                  <a href="mailto:jm@nospam-jmason.org">jm@nospam-jmason.org</a>, are automatically converted into links to that same
+                  address.
+                  
+                </p>
+                 <a name="Blocking_EtText_Link_Interpretation"><h3>Blocking EtText Link Interpretation</h3></a><p>
+                  To block interpretation as a link, replace square brackets with the HTML
+                  entities <strong>&amp;etsqi;</strong> and <strong>&amp;etsqo;</strong>, which map to [ and ]
+                  respectively; replace quote characters, <strong>"</strong>, with two apostrophes,
+                  <strong>&#39;&#39;</strong>. If that doesn't do the trick, wrap the entire section of text
+                  with the <strong>&lt;!--etsafe--&gt;</strong>...<strong>&lt;!--/etsafe--&gt;</strong> tags.
+                  
+                </p>
                 <p>
                   
                 </p>
               </p>
               <hr />
-              <h1>Sidebars and Side Images</h1><p>
-                If you wish to display an image, or small sidebar, beside a paragraph of text,
-                use the <strong>&lt;etleft&gt;</strong> and <strong>&lt;etright&gt;</strong>
-                tags. These are rendered as a one-row, two-column
-                <strong>&lt;table&gt;</strong> wrapping the paragraph and the sidebar, as
-                follows:
+              <h1>Similar Systems</h1><p>
+                EtText-like plain-text-to-markup conversion systems have a long history. The
+                first time I came across the concept was with <a href="http://www.bsdi.com/setext/">Setext</a>, which was
+                included with Tony Sanders' <em>Plexus</em> web server, back in September 1993.
+                Yes, 1993. Setext has been around for a while!
                 
               </p>
               <p>
-                <pre>
+                <a href="http://c2.com/cgi/wiki?WikiWikiWeb">WikiWikiWeb</a> is quite a recent, well-established system which uses
+                a similar markup style.
                 
-  &lt;etleft&gt;&lt;img src=bubba.png&gt;&lt;/etleft&gt;This is the main
-  paragraph body.  Foo bar baz blah blah blah etc.
-              </pre>
-            </p>
-            <p>
-              Is displayed as:
-              
-            </p>
-            <table>
-              <tr>
-                <td valign="top">
-                  <img src="bubba.png"  width="110" height="70" />
-                </td>
-                <td width="99%" valign="top">
-                  <p>
-                    This is the main paragraph body.
-                    Foo bar baz blah blah blah etc.
-                  </p>
-                </td>
-              </tr>
-            </table>
-            <p>
-              <pre>
-              
-  &lt;etright&gt;&lt;img src=bubba.png&gt;&lt;/etright&gt;This is the
-  main paragraph body.  Foo bar baz blah blah blah etc.
-            </pre>
-          </p>
-          <p>
-            Is displayed as:
-            
-          </p>
-          <table>
-            <tr>
-              <td width="99%" valign="top">
-                <p>
-                  This is the main paragraph body.
-                  Foo bar baz blah blah blah etc.
-                </p>
-              </td>
-              <td valign="top">
-                <img src="bubba.png"  width="110" height="70" />
-              </td>
-            </tr>
-          </table>
-        </p>
-        <hr />
-        <h1>Links in EtText</h1><p>
-          As well as the standard <strong>&lt;a href=url&gt;...&lt;/a&gt;</strong> link
-          specification used in HTML, EtText will automatically add href tags for URLs
-          and email addresses that occur in the text. In addition, EtText supports its
-          own link format, as follows.
-          
-        </p>
-        <p>
-          The basic concept is of a word or "quoted set of words" followed by an
-          optional link label in [square brackets], like this: <strong>"this is a
-          link" [label]</strong>.
-          
-        </p>
-        <p>
-          The href used in the link is then defined at another point in the document, as
-          an indented line like this:
-          
-        </p>
-        <p>
-          <pre>
-          <!--etsafe-->
-          
-  label: http://url
-<!--/etsafe-->
-                  </pre>
-      </p>
-      <p>
-        Text and markup can be enclosed in the quotes, everything quoted will become
-        part of the link text. Single words or HTML tags do not need to be quoted, so
-        
-      </p>
-      <p>
-        <pre>
-        <!--etsafe-->
-        
-  &lt;img src="/license_plate.jpg" width="10" height="10"&gt; &#91;homepage&#93;
-<!--/etsafe-->
-              </pre>
-    </p>
-    <p>
-      will work correctly.
-      
-    </p>
-    <a name="Glossary_Links"><h3>Glossary Links</h3></a><p>
-      EtText also supports a concept called <em>glossary links</em>; if you define a link,
-      the name of that link will automatically become a href if enclosed in quotes.
-      For example:
-      
-    </p>
-    <p>
-      <pre>
-      <!--etsafe-->
-      
-  &#91;Justin Mason&#93;: http://jmason.org/
-<!--/etsafe-->
-          </pre>
-  </p>
-  <p>
-    will mean that any occurrence of the name <strong>"Justin Mason"</strong>, in quotes, in
-    <em>any</em> EtText content chunk or file in the site, becomes a link to that
-    address.
-    
-  </p>
-  <p>
-    These links are stored in the <a href="http://webmake.taint.org/">WebMake</a> cache file, if <a href="http://webmake.taint.org/">WebMake</a> is being used.
-    Alternatively, if you are using the Text::EtText modules yourself, provide an
-    implementation of the <strong>Text::EtText::LinkGlossary</strong> interface to support this.
-    
-  </p>
-  <p>
-    Quoted bits of text that do not map to an entry in the glossary are not
-    converted to links (unless they're followed by a square-bracketed link-label
-    reference).
-    
-  </p>
-  <a name="More_Convenient_Links"><h3>More Convenient Links</h3></a><p>
-    In addition, if the link definition is preceded with <code>Auto:</code>, the quotes are
-    not required, and any occurrence of the words in the link label, with or
-    without quotes, will become a link.
-    
-  </p>
-  <p>
-    <pre>
-    <!--etsafe-->
-    
-  Auto: &#91;WebMake&#93;: http://webmake.taint.org/
-  Auto: &#91;any occurrence of the words&#93;: http://webmake.taint.org/
-<!--/etsafe-->
-      </pre>
-</p>
-<a name="URLs_and_Email_Addresses"><h3>URLs and Email Addresses</h3></a><p>
-  URLs, such as <a href="http://webmake.taint.org/">http://webmake.taint.org/</a> , and email addresses, such as
-  <a href="mailto:jm@nospam-jmason.org">jm@nospam-jmason.org</a>, are automatically converted into links to that same
-  address.
-  
-</p>
-<a name="Blocking_EtText_Link_Interpretation"><h3>Blocking EtText Link Interpretation</h3></a><p>
-  To block interpretation as a link, replace square brackets with the HTML
-  entities <strong>&amp;etsqi;</strong> and <strong>&amp;etsqo;</strong>, which map to [ and ]
-  respectively; replace quote characters, <strong>"</strong>, with two apostrophes,
-  <strong>&#39;&#39;</strong>. If that doesn't do the trick, wrap the entire section of text
-  with the <strong>&lt;!--etsafe--&gt;</strong>...<strong>&lt;!--/etsafe--&gt;</strong> tags.
-  
-</p>
-<p>
-  
-</p>
-<hr />
-<h1>Similar Systems</h1><p>
-  EtText-like plain-text-to-markup conversion systems have a long history. The
-  first time I came across the concept was with <a href="http://www.bsdi.com/setext/">Setext</a>, which was
-  included with Tony Sanders' <em>Plexus</em> web server, back in September 1993.
-  Yes, 1993. Setext has been around for a while!
-  
-</p>
-<p>
-  <a href="http://c2.com/cgi/wiki?WikiWikiWeb">WikiWikiWeb</a> is quite a recent, well-established system which uses
-  a similar markup style.
-  
-</p>
-<p>
-  The real inspiration for EtText was Userland's <a href="http://www.userland.com/">Frontier</a>; Dave
-  Winer's evangelisation of its easily-editable markup system convinced me that
-  it was worth polishing up the rudimentary EtText system I had then. In
-  addition, the name "EtText" is derived from "Edit This Text", in
-  a tip of the hat to Dave's "Edit This Page" concept.
-  
-</p>
-<p>
-  Some well-known sites that use their own converters to convert
-  plain-text to markup include <a href="http://www.blogger.com/">http://www.blogger.com/</a>, <a href="http://slashdot.org/">http://slashdot.org/</a>
-  (for comments) and <a href="http://www.advogato.org/">http://www.advogato.org/</a>.
-  
-</p>
-<p>
-  Jorn Barger maintains an impressive summary of etext formats at <a href="http://www.robotwisdom.com/net/etextfaq.html">his Robot
-  Wisdom site</a>. Skip down to section 3, <em>Internet etext
-  standards</em>, for the directly-relevant stuff.
-  
-</p>
-<p>
-  Zope and ZWiki use a format called <a href="http://dev.zope.org/Wikis/DevSite/Proposals/StructuredText">StructuredText</a>, which again comes from
-  WikiLand. There's some interesting work going on there with the <a href="http://www.zope.org/Members/jim/StructuredTextWiki/STXDocument">STXDocument</a>
-  object, which is "a web-managable object that contains information marked up
-  in the structured text format".
-  
-</p>
-<p>
-  
-</p>
-<hr />
-<h1>When HTML and EtText Collide</h1><p>
-  HTML tags can be used freely throughout an EtText document. However, in some
-  situations, you may wish to preserve whitespace, avoid paragraph tags being
-  added, etc.; to use your own HTML without meddling from EtText, wrap it in an
-  <strong>&lt;!--etsafe--&gt;</strong>...<strong>&lt;!--/etsafe--&gt;</strong>
-  tag pair; this will protect it.
-  
-</p>
-<p>
-  Note that text blocks wrapped in <strong>&lt;pre&gt;</strong>,
-  <strong>&lt;listing&gt;</strong> and <strong>&lt;xmp&gt;</strong> tags are
-  automatically protected in this way; the <strong>&lt;!--etsafe--&gt;</strong>
-  tag pair is not required.
-  
-</p>
-<p>
-  EtText adds two entities, <strong>&amp;etsqi;</strong> and <strong>&amp;etsqo;</strong>. These represent
-  [ and ] respectively, and are used to protect a square-bracketed
-  piece of text from being interpreted as a link URL (see <em>Link Markup</em> below).
-  
-</p>
-<p>
-  If this is insufficient, and you're using <a href="http://webmake.taint.org/">WebMake</a>, the <strong>&lt;safe&gt;</strong> tag
-  will escape any type of code to protect it from interpretation by <a href="http://webmake.taint.org/">WebMake</a>,
-  EtText or HTML.
-  
-</p>
-<p>
-  
-</p>
-<hr />
-<h1>Text::EtText::DefaultGlossary</h1><!-- INDEX BEGIN -->
-<ul>
-  <li>
-    <a href="#NAME">NAME</a><li>
-      <a href="#SYNOPSIS">SYNOPSIS</a><li>
-        <a href="#DESCRIPTION">DESCRIPTION</a><li>
-          <a href="#METHODS">METHODS</a>
-        </ul>
-<!-- INDEX END -->
-                <hr />
-        <h1><a name="NAME">NAME</a></h1><p>
-          
-          Text::EtText::DefaultGlossary - default, non-persistent link glossary
-          <hr />
-          <h1><a name="SYNOPSIS">SYNOPSIS</a></h1><hr />
-          <h1><a name="DESCRIPTION">DESCRIPTION</a></h1><p>
-            
-            The <code>Text::EtText::DefaultGlossary</code> is an implementation of
-            <code>Text::EtText::LinkGlossary</code> which is used if no other implementation is registered.
-            <p>
-              
-              It will not save glossary link details persistently.
+              </p>
+              <p>
+                <a href="http://www.aigeek.com/txt2html/">txt2html</a> provided a lot of impetus to rewrite the core of EtText since 2.0,
+                since its list-parsing engine was <em>much</em> better. However EtText is now up to
+                scratch again ;)
+                
+              </p>
+              <p>
+                The real inspiration for EtText was Userland's <a href="http://www.userland.com/">Frontier</a>; Dave
+                Winer's evangelisation of its easily-editable markup system convinced me that
+                it was worth polishing up the rudimentary EtText system I had then. In
+                addition, the name "EtText" is derived from "Edit This Text", in
+                a tip of the hat to Dave's "Edit This Page" concept.
+                
+              </p>
+              <p>
+                Some well-known sites that use their own converters to convert
+                plain-text to markup include <a href="http://www.blogger.com/">http://www.blogger.com/</a>, <a href="http://slashdot.org/">http://slashdot.org/</a>
+                (for comments) and <a href="http://www.advogato.org/">http://www.advogato.org/</a>.
+                
+              </p>
+              <p>
+                Jorn Barger maintains an impressive summary of etext formats at <a href="http://www.robotwisdom.com/net/etextfaq.html">his Robot
+                Wisdom site</a>. Skip down to section 3, <em>Internet etext
+                standards</em>, for the directly-relevant stuff.
+                
+              </p>
+              <p>
+                Zope and ZWiki use a format called <a href="http://dev.zope.org/Wikis/DevSite/Proposals/StructuredText">StructuredText</a>, which again comes from
+                WikiLand. There's some interesting work going on there with the <a href="http://www.zope.org/Members/jim/StructuredTextWiki/STXDocument">STXDocument</a>
+                object, which is "a web-managable object that contains information marked up
+                in the structured text format".
+                
+              </p>
+              <p>
+                
+              </p>
               <hr />
-              <h1><a name="METHODS">METHODS</a></h1>
-            </dl>
-            <hr />
-            <h1>Text::EtText::EtText2HTML</h1><!-- INDEX BEGIN -->
-            <ul>
-              <li>
-                <a href="#NAME">NAME</a><li>
-                  <a href="#SYNOPSIS">SYNOPSIS</a><li>
-                    <a href="#DESCRIPTION">DESCRIPTION</a><li>
-                      <a href="#METHODS">METHODS</a><li>
-                        <a href="#MORE_DOCUMENTATION">MORE DOCUMENTATION</a><li>
-                          <a href="#SEE_ALSO">SEE ALSO</a><li>
-                            <a href="#AUTHOR">AUTHOR</a><li>
-                              <a href="#COPYRIGHT">COPYRIGHT</a><li>
-                                <a href="#AVAILABILITY">AVAILABILITY</a>
-                              </ul>
+              <h1>When HTML and EtText Collide</h1><p>
+                HTML tags can be used freely throughout an EtText document. However, in some
+                situations, you may wish to preserve whitespace, avoid paragraph tags being
+                added, etc.; to use your own HTML without meddling from EtText, wrap it in an
+                <strong>&lt;!--etsafe--&gt;</strong>...<strong>&lt;!--/etsafe--&gt;</strong>
+                tag pair; this will protect it.
+                
+              </p>
+              <p>
+                Note that text blocks wrapped in <strong>&lt;pre&gt;</strong>,
+                <strong>&lt;listing&gt;</strong> and <strong>&lt;xmp&gt;</strong> tags are
+                automatically protected in this way; the <strong>&lt;!--etsafe--&gt;</strong>
+                tag pair is not required.
+                
+              </p>
+              <p>
+                EtText adds two entities, <strong>&amp;etsqi;</strong> and <strong>&amp;etsqo;</strong>. These represent
+                [ and ] respectively, and are used to protect a square-bracketed
+                piece of text from being interpreted as a link URL (see <em>Link Markup</em> below).
+                
+              </p>
+              <p>
+                If this is insufficient, and you're using <a href="http://webmake.taint.org/">WebMake</a>, the <strong>&lt;safe&gt;</strong> tag
+                will escape any type of code to protect it from interpretation by <a href="http://webmake.taint.org/">WebMake</a>,
+                EtText or HTML.
+                
+              </p>
+              <p>
+                
+              </p>
+              <hr />
+              <h1>Text::EtText::DefaultGlossary</h1><!-- INDEX BEGIN -->
+              <ul>
+                <li>
+                  <a href="#NAME">NAME</a><li>
+                    <a href="#SYNOPSIS">SYNOPSIS</a><li>
+                      <a href="#DESCRIPTION">DESCRIPTION</a><li>
+                        <a href="#METHODS">METHODS</a>
+                      </ul>
 <!-- INDEX END -->
-                                                            <hr />
-                              <h1><a name="NAME">NAME</a></h1><p>
-                                
-                                Text::EtText::EtText2HTML - convert from the simple EtText editable-text
-                                format into HTML
-                                <hr />
-                                <h1><a name="SYNOPSIS">SYNOPSIS</a></h1><p>
-                                  <pre>
-                                    my $t = new Text::EtText::EtText2HTML;
-  print $t-&gt;text2html ($text);
-                                </pre>
-                                <p>
-                                  
-                                  or
-                                  <p>
-                                    <pre>
-                                      my $t = new Text::EtText::EtText2HTML;
-  print $t-&gt;text2html ();               # from STDIN
-                                  </pre>
-                                  <hr />
-                                  <h1><a name="DESCRIPTION">DESCRIPTION</a></h1><p>
-                                    
-                                    ettext2html will convert a text file in the EtText editable-text format
-                                    into HTML.
-                                    <p>
-                                      
-                                      For more information on the EtText format, check the WebMake documentation
-                                      on the web at <a href="http://webmake.taint.org/">http://webmake.taint.org/</a> .
-                                      <hr />
-                                      <h1><a name="METHODS">METHODS</a></h1><dl>
-                                        <dt>
-                                          <strong><a name="item__f">$f = new Text::EtText::EtText2HTML</a></strong>
-                                        </dt>
-                                        <dd>
-                                          <p>
-                                            
-                                            Constructs a new <code>Text::EtText::EtText2HTML</code> object.
-                                            
-                                          </dd>
-                                          <dt>
-                                            <strong><a name="item__f_set_option">$f-&gt;set_option ($optname, $optval);</a></strong>
-                                          </dt>
-                                          <dd>
-                                            <p>
+                                            <hr />
+                       <h1><a name="NAME">NAME</a></h1><p>
+                        
+                        Text::EtText::DefaultGlossary - default, non-persistent link glossary
+                        <hr />
+                         <h1><a name="SYNOPSIS">SYNOPSIS</a></h1><hr />
+                         <h1><a name="DESCRIPTION">DESCRIPTION</a></h1><p>
+                          
+                          The <code>Text::EtText::DefaultGlossary</code> is an implementation of
+                          <code>Text::EtText::LinkGlossary</code> which is used if no other implementation is registered.
+                          <p>
+                            
+                            It will not save glossary link details persistently.
+                            <hr />
+                             <h1><a name="METHODS">METHODS</a></h1>
+                          </dl>
+                          <hr />
+                          <h1>Text::EtText::EtText2HTML</h1><!-- INDEX BEGIN -->
+                          <ul>
+                            <li>
+                              <a href="#NAME">NAME</a><li>
+                                <a href="#SYNOPSIS">SYNOPSIS</a><li>
+                                  <a href="#DESCRIPTION">DESCRIPTION</a><li>
+                                    <a href="#METHODS">METHODS</a><li>
+                                      <a href="#MORE_DOCUMENTATION">MORE DOCUMENTATION</a><li>
+                                        <a href="#SEE_ALSO">SEE ALSO</a><li>
+                                          <a href="#AUTHOR">AUTHOR</a><li>
+                                            <a href="#COPYRIGHT">COPYRIGHT</a><li>
+                                              <a href="#AVAILABILITY">AVAILABILITY</a>
+                                            </ul>
+<!-- INDEX END -->
+                                                                                        <hr />
+                                             <h1><a name="NAME">NAME</a></h1><p>
                                               
-                                              Set an EtText option. (Options can also be set on the WebMake object
-                                              itself, or from inside the WebMake file.) Currently supported options are:
-                                              <dl>
-                                                
-                                              </dd>
-                                              <dt>
-                                                <strong><a name="item_EtTextOneCharMarkup">EtTextOneCharMarkup (default: 0)</a></strong>
-                                              </dt>
-                                              <dd>
-                                                <p>
+                                              Text::EtText::EtText2HTML - convert from the simple EtText editable-text
+                                              format into HTML
+                                              <hr />
+                                               <h1><a name="SYNOPSIS">SYNOPSIS</a></h1><p>
+                                                <pre>  my $t = new Text::EtText::EtText2HTML;
+  print $t-&gt;text2html ($text);
+</pre><p>
                                                   
-                                                  Allow one-character sets of asterisks etc. to mark up as strong, emphasis
-                                                  etc., instead of the default two-character markup.
-                                                  
-                                                </dd>
-                                                <dt>
-                                                  <strong><a name="item_EtTextBaseHref">EtTextBaseHref (default: '')</a></strong>
-                                                </dt>
-                                                <dd>
+                                                  or
                                                   <p>
-                                                    
-                                                    The base HREF to use for relative links. If set, all relative links in tags
-                                                    with HREF attributes will be rewritten as absolute links, making the output
-                                                    HTML independent of the URL tree structure.
-                                                    
-                                                  </dd>
-                                                  <dt>
-                                                    <strong><a name="item_EtTextHrefsRelativeToTop">EtTextHrefsRelativeToTop (default: 1)</a></strong>
-                                                  </dt>
-                                                  <dd>
-                                                    <p>
+                                                    <pre>  my $t = new Text::EtText::EtText2HTML;
+  print $t-&gt;text2html ();               # from STDIN
+</pre><hr />
+                                                     <h1><a name="DESCRIPTION">DESCRIPTION</a></h1><p>
                                                       
-                                                      Indicates that all EtText links are relative to the top of the WebMake
-                                                      document tree. This (obviously) is only relevant if you are using EtText in
-                                                      conjunction with WebMake. If set, all relative links in tags with HREF
-                                                      attributes will be rewritten as relative to the ''top'' of the WebMake
-                                                      site, making the output HTML independent of the URL tree structure.
-                                                      
-                                                    </dd>
-                                                  </dl>
-                                                </dd>
-                                                <dt>
-                                                  <strong><a name="item__html">$html = $f-&gt;set_glossary ($glosobj)</a></strong>
-                                                </dt>
-                                                <dd>
-                                                  <p>
-                                                    
-                                                    Provide a glossary for shared link definitions, allowing link definitions
-                                                    to be shared and reused across multiple EtText files. <code>$glosobj</code> must implement the interface defined by <code>Text::EtText::LinkGlossary</code>.
-                                                    <p>
-                                                      
-                                                      See below for more information on this interface.
-                                                      
-                                                    </dd>
-                                                    <dt>
-                                                      <strong>$html = $f-&gt;text2html( [$text] )</strong>
-                                                    </dt>
-                                                    <dd>
+                                                      ettext2html will convert a text file in the EtText editable-text format
+                                                      into HTML.
                                                       <p>
                                                         
-                                                        Convert text, either from the argument or from STDIN, into HTML.
-                                                        
-                                                      </dd>
-                                                    </dl>
-                                                    <hr />
-                                                    <h1><a name="MORE_DOCUMENTATION">MORE DOCUMENTATION</a></h1><p>
-                                                      
-                                                      See also <a href="http://webmake.taint.org/">http://webmake.taint.org/</a>
-                                                      for more information.
-                                                      <hr />
-                                                      <h1><a name="SEE_ALSO">SEE ALSO</a></h1><p>
-                                                        <code>webmake</code><code>ettext2html</code><code>ethtml2text</code><code>HTML::WebMake</code><code>Text::EtText::EtText2HTML</code><code>Text::EtText::HTML2EtText</code><code>Text::EtText::LinkGlossary</code><code>Text::EtText::DefaultGlossary</code><hr />
-                                                        <h1><a name="AUTHOR">AUTHOR</a></h1><p>
-                                                          
-                                                          Justin Mason &lt;jm /at/ jmason.org&gt;
-                                                          <hr />
-                                                          <h1><a name="COPYRIGHT">COPYRIGHT</a></h1><p>
-                                                            
-                                                            WebMake is distributed under the terms of the GNU Public License.
-                                                            <hr />
-                                                            <h1><a name="AVAILABILITY">AVAILABILITY</a></h1><p>
+                                                        For more information on the EtText format, check the WebMake documentation
+                                                        on the web at <a href="http://webmake.taint.org/">http://webmake.taint.org/</a> .
+                                                        <hr />
+                                                         <h1><a name="METHODS">METHODS</a></h1><dl>
+                                                          <dt>
+                                                            <strong><a name="item__f">$f = new Text::EtText::EtText2HTML</a></strong>
+                                                          </dt>
+                                                          <dd>
+                                                            <p>
                                                               
-                                                              The latest version of this library is likely to be available from CPAN as
-                                                              well as:
+                                                              Constructs a new <code>Text::EtText::EtText2HTML</code> object.
+                                                              
+                                                            </dd>
+                                                            <dt>
+                                                              <strong><a name="item__f_set_option">$f-&gt;set_option ($optname, $optval);</a></strong>
+                                                            </dt>
+                                                            <dd>
                                                               <p>
-                                                                <pre>
-                                                                  <a href="http://webmake.taint.org/">http://webmake.taint.org/</a>
-                                                              </pre>
-                                                              <hr />
-                                                              <h1>Text::EtText::HTML2EtText</h1><!-- INDEX BEGIN -->
-                                                              <ul>
-                                                                <li>
-                                                                  <a href="#NAME">NAME</a><li>
-                                                                    <a href="#SYNOPSIS">SYNOPSIS</a><li>
-                                                                      <a href="#DESCRIPTION">DESCRIPTION</a><li>
-                                                                        <a href="#METHODS">METHODS</a><li>
-                                                                          <a href="#MORE_DOCUMENTATION">MORE DOCUMENTATION</a><li>
-                                                                            <a href="#SEE_ALSO">SEE ALSO</a><li>
-                                                                              <a href="#AUTHOR">AUTHOR</a><li>
-                                                                                <a href="#COPYRIGHT">COPYRIGHT</a><li>
-                                                                                  <a href="#AVAILABILITY">AVAILABILITY</a>
-                                                                                </ul>
-<!-- INDEX END -->
-                                                                                                                                                                <hr />
-                                                                                <h1><a name="NAME">NAME</a></h1><p>
+                                                                
+                                                                Set an EtText option. (Options can also be set on the WebMake object
+                                                                itself, or from inside the WebMake file.) Currently supported options are:
+                                                                <dl>
+                                                                  
+                                                                </dd>
+                                                                <dt>
+                                                                  <strong><a name="item_EtTextOneCharMarkup">EtTextOneCharMarkup (default: 0)</a></strong>
+                                                                </dt>
+                                                                <dd>
+                                                                  <p>
+                                                                    
+                                                                    Allow one-character sets of asterisks etc. to mark up as strong, emphasis
+                                                                    etc., instead of the default two-character markup.
+                                                                    
+                                                                  </dd>
+                                                                  <dt>
+                                                                    <strong><a name="item_EtTextOldLinkStyle">EtTextOldLinkStyle (default: 1)</a></strong>
+                                                                  </dt>
+                                                                  <dd>
+                                                                    <p>
+                                                                      
+                                                                      Use the older EtText link-markup style, with quote characters and single
+                                                                      square brackets. This is easy to type, but if you're using text from other
+                                                                      people, it can easily destroy formatting; so the new link-markup style,
+                                                                      with double square brackets, can be used instead.
+                                                                      
+                                                                    </dd>
+                                                                    <dt>
+                                                                      <strong><a name="item_EtTextBaseHref">EtTextBaseHref (default: '')</a></strong>
+                                                                    </dt>
+                                                                    <dd>
+                                                                      <p>
+                                                                        
+                                                                        The base HREF to use for relative links. If set, all relative links in tags
+                                                                        with HREF attributes will be rewritten as absolute links, making the output
+                                                                        HTML independent of the URL tree structure.
+                                                                        
+                                                                      </dd>
+                                                                      <dt>
+                                                                        <strong><a name="item_EtTextHrefsRelativeToTop">EtTextHrefsRelativeToTop (default: 0)</a></strong>
+                                                                      </dt>
+                                                                      <dd>
+                                                                        <p>
+                                                                          
+                                                                          Indicates that all EtText links are relative to the top of the WebMake
+                                                                          document tree. This (obviously) is only relevant if you are using EtText in
+                                                                          conjunction with WebMake, and WebMake sets it by default. If set, all
+                                                                          relative links in tags with HREF attributes will be rewritten as relative
+                                                                          to the ''top'' of the WebMake site, making the output HTML independent of
+                                                                          the URL tree structure.
+                                                                          
+                                                                        </dd>
+                                                                      </dl>
+                                                                    </dd>
+                                                                    <dt>
+                                                                      <strong><a name="item__html">$html = $f-&gt;set_glossary ($glosobj)</a></strong>
+                                                                    </dt>
+                                                                    <dd>
+                                                                      <p>
+                                                                        
+                                                                        Provide a glossary for shared link definitions, allowing link definitions
+                                                                        to be shared and reused across multiple EtText files. <code>$glosobj</code> must implement the interface defined by <code>Text::EtText::LinkGlossary</code>.
+                                                                        <p>
+                                                                          
+                                                                          See below for more information on this interface.
+                                                                          
+                                                                        </dd>
+                                                                        <dt>
+                                                                          <strong>$html = $f-&gt;text2html( [$text] )</strong>
+                                                                        </dt>
+                                                                        <dd>
+                                                                          <p>
+                                                                            
+                                                                            Convert text, either from the argument or from STDIN, into HTML.
+                                                                            
+                                                                          </dd>
+                                                                        </dl>
+                                                                        <hr />
+                                                                         <h1><a name="MORE_DOCUMENTATION">MORE DOCUMENTATION</a></h1><p>
+                                                                          
+                                                                          See also <a href="http://webmake.taint.org/">http://webmake.taint.org/</a>
+                                                                          for more information.
+                                                                          <hr />
+                                                                           <h1><a name="SEE_ALSO">SEE ALSO</a></h1><p>
+                                                                             <code>webmake</code> <code>ettext2html</code> <code>ethtml2text</code> <code>HTML::WebMake</code> <code>Text::EtText::EtText2HTML</code> <code>Text::EtText::HTML2EtText</code> <code>Text::EtText::LinkGlossary</code> <code>Text::EtText::DefaultGlossary</code><hr />
+                                                                             <h1><a name="AUTHOR">AUTHOR</a></h1><p>
+                                                                              
+                                                                              Justin Mason &lt;jm /at/ jmason.org&gt;
+                                                                              <hr />
+                                                                               <h1><a name="COPYRIGHT">COPYRIGHT</a></h1><p>
+                                                                                
+                                                                                WebMake is distributed under the terms of the GNU Public License.
+                                                                                <hr />
+                                                                                 <h1><a name="AVAILABILITY">AVAILABILITY</a></h1><p>
                                                                                   
-                                                                                  Text::EtText::HTML2EtText - convert from HTML to the EtText editable-text
-                                                                                  format
-                                                                                  <hr />
-                                                                                  <h1><a name="SYNOPSIS">SYNOPSIS</a></h1><p>
-                                                                                    <pre>
-                                                                                      my $t = new Text::EtText::HTML2EtText;
-  print $t-&gt;html2text ($html);
-                                                                                  </pre>
+                                                                                  The latest version of this library is likely to be available from CPAN as
+                                                                                  well as:
                                                                                   <p>
-                                                                                    
-                                                                                    or
-                                                                                    <p>
-                                                                                      <pre>
-                                                                                        my $t = new Text::EtText::HTML2EtText;
-  print $t-&gt;html2text ();                       # from STDIN
-                                                                                    </pre>
-                                                                                    <hr />
-                                                                                    <h1><a name="DESCRIPTION">DESCRIPTION</a></h1><p>
-                                                                                      
-                                                                                      ethtml2text will convert a HTML file into the EtText editable-text format,
-                                                                                      for use with webmake or ettext2html.
-                                                                                      <p>
-                                                                                        
-                                                                                        For more information on the EtText format, check the WebMake documentation
-                                                                                        on the web at <a href="http://webmake.taint.org/">http://webmake.taint.org/</a> .
-                                                                                        <hr />
-                                                                                        <h1><a name="METHODS">METHODS</a></h1><dl>
-                                                                                          <dt>
-                                                                                            <strong><a name="item__f">$f = new Text::EtText::HTML2EtText</a></strong>
-                                                                                          </dt>
-                                                                                          <dd>
-                                                                                            <p>
-                                                                                              
-                                                                                              Constructs a new <code>Text::EtText::HTML2EtText</code> object.
-                                                                                              
-                                                                                            </dd>
-                                                                                            <dt>
-                                                                                              <strong><a name="item__text">$text = $f-&gt;html2text( [$html] )</a></strong>
-                                                                                            </dt>
-                                                                                            <dd>
-                                                                                              <p>
-                                                                                                
-                                                                                                Convert HTML, either from the argument or from STDIN, into EtText.
-                                                                                                
-                                                                                              </dd>
-                                                                                            </dl>
-                                                                                            <hr />
-                                                                                            <h1><a name="MORE_DOCUMENTATION">MORE DOCUMENTATION</a></h1><p>
-                                                                                              
-                                                                                              See also <a href="http://webmake.taint.org/">http://webmake.taint.org/</a>
-                                                                                              for more information.
-                                                                                              <hr />
-                                                                                              <h1><a name="SEE_ALSO">SEE ALSO</a></h1><p>
-                                                                                                <code>webmake</code><code>ettext2html</code><code>ethtml2text</code><code>HTML::WebMake</code><code>Text::EtText::EtText2HTML</code><code>Text::EtText::HTML2EtText</code><hr />
-                                                                                                <h1><a name="AUTHOR">AUTHOR</a></h1><p>
-                                                                                                  
-                                                                                                  Justin Mason &lt;jm /at/ jmason.org&gt;
-                                                                                                  <hr />
-                                                                                                  <h1><a name="COPYRIGHT">COPYRIGHT</a></h1><p>
-                                                                                                    
-                                                                                                    WebMake is distributed under the terms of the GNU Public License.
-                                                                                                    <hr />
-                                                                                                    <h1><a name="AVAILABILITY">AVAILABILITY</a></h1><p>
-                                                                                                      
-                                                                                                      The latest version of this library is likely to be available from CPAN as
-                                                                                                      well as:
-                                                                                                      <p>
-                                                                                                        <pre>
-                                                                                                          <a href="http://webmake.taint.org/">http://webmake.taint.org/</a>
-                                                                                                      </pre>
-                                                                                                      <hr />
-                                                                                                      <h1>Text::EtText::LinkGlossary</h1><!-- INDEX BEGIN -->
-                                                                                                      <ul>
-                                                                                                        <li>
-                                                                                                          <a href="#NAME">NAME</a><li>
-                                                                                                            <a href="#SYNOPSIS">SYNOPSIS</a><li>
-                                                                                                              <a href="#DESCRIPTION">DESCRIPTION</a><li>
-                                                                                                                <a href="#METHODS">METHODS</a>
-                                                                                                              </ul>
+                                                                                    <pre>  <a href="http://webmake.taint.org/">http://webmake.taint.org/</a>
+</pre><hr />
+                                                                                    <h1>Text::EtText::HTML2EtText</h1><!-- INDEX BEGIN -->
+                                                                                    <ul>
+                                                                                      <li>
+                                                                                        <a href="#NAME">NAME</a><li>
+                                                                                          <a href="#SYNOPSIS">SYNOPSIS</a><li>
+                                                                                            <a href="#DESCRIPTION">DESCRIPTION</a><li>
+                                                                                              <a href="#METHODS">METHODS</a><li>
+                                                                                                <a href="#MORE_DOCUMENTATION">MORE DOCUMENTATION</a><li>
+                                                                                                  <a href="#SEE_ALSO">SEE ALSO</a><li>
+                                                                                                    <a href="#AUTHOR">AUTHOR</a><li>
+                                                                                                      <a href="#COPYRIGHT">COPYRIGHT</a><li>
+                                                                                                        <a href="#AVAILABILITY">AVAILABILITY</a>
+                                                                                                      </ul>
 <!-- INDEX END -->
-                                                                                                                                                                                                                            <hr />
-                                                                                                              <h1><a name="NAME">NAME</a></h1><p>
+                                                                                                                                                                                                            <hr />
+                                                                                                       <h1><a name="NAME">NAME</a></h1><p>
+                                                                                                        
+                                                                                                        Text::EtText::HTML2EtText - convert from HTML to the EtText editable-text
+                                                                                                        format
+                                                                                                        <hr />
+                                                                                                         <h1><a name="SYNOPSIS">SYNOPSIS</a></h1><p>
+                                                                                                          <pre>  my $t = new Text::EtText::HTML2EtText;
+  print $t-&gt;html2text ($html);
+</pre><p>
+                                                                                                            
+                                                                                                            or
+                                                                                                            <p>
+                                                                                                              <pre>  my $t = new Text::EtText::HTML2EtText;
+  print $t-&gt;html2text ();                       # from STDIN
+</pre><hr />
+                                                                                                               <h1><a name="DESCRIPTION">DESCRIPTION</a></h1><p>
                                                                                                                 
-                                                                                                                Text::EtText::LinkGlossary - interface for EtText link glossaries to
-                                                                                                                implement.
-                                                                                                                <hr />
-                                                                                                                <h1><a name="SYNOPSIS">SYNOPSIS</a></h1><p>
-                                                                                                                  <pre>
-                                                                                                                    use Text::EtText::LinkGlossary;
-                                                                                                                </pre>
+                                                                                                                ethtml2text will convert a HTML file into the EtText editable-text format,
+                                                                                                                for use with webmake or ettext2html.
                                                                                                                 <p>
-                                                                                                                  <pre>
-                                                                                                                    @ISA = qw(Text::EtText::LinkGlossary);
-                                                                                                                </pre>
-                                                                                                                <p>
-                                                                                                                  <pre>
-                                                                                                                    sub open { ... }
-  sub close { ... }
-  ...
-                                                                                                                </pre>
-                                                                                                                <hr />
-                                                                                                                <h1><a name="DESCRIPTION">DESCRIPTION</a></h1><p>
                                                                                                                   
-                                                                                                                  The <code>Text::EtText::LinkGlossary</code> is an interface which allows EtText to support ''link glossaries'',
-                                                                                                                  persistent collections of link text and its corresponding HREF.
-                                                                                                                  <p>
-                                                                                                                    
-                                                                                                                    The interface which needs to be implemented is as follows:
-                                                                                                                    <hr />
-                                                                                                                    <h1><a name="METHODS">METHODS</a></h1><dl>
+                                                                                                                  For more information on the EtText format, check the WebMake documentation
+                                                                                                                  on the web at <a href="http://webmake.taint.org/">http://webmake.taint.org/</a> .
+                                                                                                                  <hr />
+                                                                                                                   <h1><a name="METHODS">METHODS</a></h1><dl>
+                                                                                                                    <dt>
+                                                                                                                      <strong><a name="item__f">$f = new Text::EtText::HTML2EtText</a></strong>
+                                                                                                                    </dt>
+                                                                                                                    <dd>
+                                                                                                                      <p>
+                                                                                                                        
+                                                                                                                        Constructs a new <code>Text::EtText::HTML2EtText</code> object.
+                                                                                                                        
+                                                                                                                      </dd>
                                                                                                                       <dt>
-                                                                                                                        <strong><a name="item__g_open_">$g-&gt;open()</a></strong>
+                                                                                                                        <strong><a name="item__text">$text = $f-&gt;html2text( [$html] )</a></strong>
                                                                                                                       </dt>
                                                                                                                       <dd>
                                                                                                                         <p>
                                                                                                                           
-                                                                                                                          Open the link glossary <code>$g</code> for reading and writing.
+                                                                                                                          Convert HTML, either from the argument or from STDIN, into EtText.
                                                                                                                           
                                                                                                                         </dd>
-                                                                                                                        <dt>
-                                                                                                                          <strong><a name="item__g_close_">$g-&gt;close()</a></strong>
-                                                                                                                        </dt>
-                                                                                                                        <dd>
-                                                                                                                          <p>
+                                                                                                                      </dl>
+                                                                                                                      <hr />
+                                                                                                                       <h1><a name="MORE_DOCUMENTATION">MORE DOCUMENTATION</a></h1><p>
+                                                                                                                        
+                                                                                                                        See also <a href="http://webmake.taint.org/">http://webmake.taint.org/</a>
+                                                                                                                        for more information.
+                                                                                                                        <hr />
+                                                                                                                         <h1><a name="SEE_ALSO">SEE ALSO</a></h1><p>
+                                                                                                                           <code>webmake</code> <code>ettext2html</code> <code>ethtml2text</code> <code>HTML::WebMake</code> <code>Text::EtText::EtText2HTML</code> <code>Text::EtText::HTML2EtText</code><hr />
+                                                                                                                           <h1><a name="AUTHOR">AUTHOR</a></h1><p>
                                                                                                                             
-                                                                                                                            Close the link glossary; no more links can be written or read.
-                                                                                                                            
-                                                                                                                          </dd>
-                                                                                                                          <dt>
-                                                                                                                            <strong><a name="item__url">$url = $g-&gt;get_link ($name)</a></strong>
-                                                                                                                          </dt>
-                                                                                                                          <dd>
-                                                                                                                            <p>
+                                                                                                                            Justin Mason &lt;jm /at/ jmason.org&gt;
+                                                                                                                            <hr />
+                                                                                                                             <h1><a name="COPYRIGHT">COPYRIGHT</a></h1><p>
                                                                                                                               
-                                                                                                                              Get a named link from the glossary.
-                                                                                                                              
-                                                                                                                            </dd>
-                                                                                                                            <dt>
-                                                                                                                              <strong><a name="item__g_put_link">$g-&gt;put_link ($name, $url)</a></strong>
-                                                                                                                            </dt>
-                                                                                                                            <dd>
-                                                                                                                              <p>
+                                                                                                                              WebMake is distributed under the terms of the GNU Public License.
+                                                                                                                              <hr />
+                                                                                                                               <h1><a name="AVAILABILITY">AVAILABILITY</a></h1><p>
                                                                                                                                 
-                                                                                                                                Put a named link to the glossary.
-                                                                                                                                
-                                                                                                                              </dd>
-                                                                                                                              <dt>
-                                                                                                                                <strong>$url = $g-&gt;get_auto_link ($name)</strong>
-                                                                                                                              </dt>
-                                                                                                                              <dd>
+                                                                                                                                The latest version of this library is likely to be available from CPAN as
+                                                                                                                                well as:
                                                                                                                                 <p>
-                                                                                                                                  
-                                                                                                                                  Get a named automatic link from the glossary.
-                                                                                                                                  
-                                                                                                                                </dd>
-                                                                                                                                <dt>
-                                                                                                                                  <strong><a name="item__g_put_auto_link">$g-&gt;put_auto_link ($name, $url)</a></strong>
-                                                                                                                                </dt>
-                                                                                                                                <dd>
-                                                                                                                                  <p>
-                                                                                                                                    
-                                                                                                                                    Put a named automatic link to the glossary.
-                                                                                                                                    
-                                                                                                                                  </dd>
-                                                                                                                                  <dt>
-                                                                                                                                    <strong><a name="item__keys">@keys = $g-&gt;get_auto_link_keys ()</a></strong>
-                                                                                                                                  </dt>
-                                                                                                                                  <dd>
-                                                                                                                                    <p>
-                                                                                                                                      
-                                                                                                                                      Get a list of the names of automatic links stored in the glossary.
-                                                                                                                                      
-                                                                                                                                    </dd>
-                                                                                                                                    <dt>
-                                                                                                                                      <strong><a name="item__g_add_auto_link_keys">$g-&gt;add_auto_link_keys (@keys)</a></strong>
-                                                                                                                                    </dt>
-                                                                                                                                    <dd>
-                                                                                                                                      <p>
-                                                                                                                                        
-                                                                                                                                        Add to the list of names of automatic links stored in the glossary.
-                                                                                                                                        
-                                                                                                                                      </dd>
-                                                                                                                                    </dl>
-                                                                                                                                    <hr />
-                                                                                                                                    <h1>ethtml2text(1)</h1><!-- INDEX BEGIN -->
-                                                                                                                                    <ul>
-                                                                                                                                      <li>
-                                                                                                                                        <a href="#NAME">NAME</a><li>
-                                                                                                                                          <a href="#SYNOPSIS">SYNOPSIS</a><li>
-                                                                                                                                            <a href="#DESCRIPTION">DESCRIPTION</a><li>
-                                                                                                                                              <a href="#INSTALLATION">INSTALLATION</a><li>
-                                                                                                                                                <a href="#ENVIRONMENT">ENVIRONMENT</a><li>
-                                                                                                                                                  <a href="#SEE_ALSO">SEE ALSO</a><li>
-                                                                                                                                                    <a href="#AUTHOR">AUTHOR</a><li>
-                                                                                                                                                      <a href="#PREREQUISITES">PREREQUISITES</a>
-                                                                                                                                                    </ul>
+                                                                                                                                  <pre>  <a href="http://webmake.taint.org/">http://webmake.taint.org/</a>
+</pre><hr />
+                                                                                                                                  <h1>Text::EtText::LinkGlossary</h1><!-- INDEX BEGIN -->
+                                                                                                                                  <ul>
+                                                                                                                                    <li>
+                                                                                                                                      <a href="#NAME">NAME</a><li>
+                                                                                                                                        <a href="#SYNOPSIS">SYNOPSIS</a><li>
+                                                                                                                                          <a href="#DESCRIPTION">DESCRIPTION</a><li>
+                                                                                                                                            <a href="#METHODS">METHODS</a>
+                                                                                                                                          </ul>
 <!-- INDEX END -->
-                                                                                                                                                                                                                                                                                                        <hr />
-                                                                                                                                                    <h1><a name="NAME">NAME</a></h1><p>
+                                                                                                                                                                                                                                                                                    <hr />
+                                                                                                                                           <h1><a name="NAME">NAME</a></h1><p>
+                                                                                                                                            
+                                                                                                                                            Text::EtText::LinkGlossary - interface for EtText link glossaries to
+                                                                                                                                            implement.
+                                                                                                                                            <hr />
+                                                                                                                                             <h1><a name="SYNOPSIS">SYNOPSIS</a></h1><p>
+                                                                                                                                              <pre>  use Text::EtText::LinkGlossary;
+</pre><p>
+                                                                                                                                                <pre>  @ISA = qw(Text::EtText::LinkGlossary);
+</pre><p>
+                                                                                                                                                  <pre>  sub open { ... }
+  sub close { ... }
+  ...
+</pre><hr />
+                                                                                                                                                   <h1><a name="DESCRIPTION">DESCRIPTION</a></h1><p>
+                                                                                                                                                    
+                                                                                                                                                    The <code>Text::EtText::LinkGlossary</code> is an interface which allows EtText to support ''link glossaries'',
+                                                                                                                                                    persistent collections of link text and its corresponding HREF.
+                                                                                                                                                    <p>
                                                                                                                                                       
-                                                                                                                                                      ethtml2text - convert from HTML to the EtText editable-text format
+                                                                                                                                                      The interface which needs to be implemented is as follows:
                                                                                                                                                       <hr />
-                                                                                                                                                      <h1><a name="SYNOPSIS">SYNOPSIS</a></h1><p>
-                                                                                                                                                        <pre>
-                                                                                                                                                          ethtml2text file.html &gt; file.txt
-                                                                                                                                                      </pre>
-                                                                                                                                                      <hr />
-                                                                                                                                                      <h1><a name="DESCRIPTION">DESCRIPTION</a></h1><p>
-                                                                                                                                                        
-                                                                                                                                                        ethtml2text will convert a HTML file into the EtText editable-text format,
-                                                                                                                                                        for use with webmake or ettext2html.
-                                                                                                                                                        <p>
-                                                                                                                                                          
-                                                                                                                                                          For more information on the EtText format, check the WebMake documentation
-                                                                                                                                                          on the web at <a href="http://ettext.taint.org/">http://ettext.taint.org/</a> .
-                                                                                                                                                          <hr />
-                                                                                                                                                          <h1><a name="INSTALLATION">INSTALLATION</a></h1><p>
+                                                                                                                                                       <h1><a name="METHODS">METHODS</a></h1><dl>
+                                                                                                                                                        <dt>
+                                                                                                                                                          <strong><a name="item__g_open_">$g-&gt;open()</a></strong>
+                                                                                                                                                        </dt>
+                                                                                                                                                        <dd>
+                                                                                                                                                          <p>
                                                                                                                                                             
-                                                                                                                                                            The <strong>ethtml2text</strong> command is part of the <strong>HTML::WebMake</strong> Perl module set. Install this as a normal Perl module, using <code>perl -MCPAN -e shell</code>, or by installing WebMake.
-                                                                                                                                                            <hr />
-                                                                                                                                                            <h1><a name="ENVIRONMENT">ENVIRONMENT</a></h1><p>
+                                                                                                                                                            Open the link glossary <code>$g</code> for reading and writing.
+                                                                                                                                                            
+                                                                                                                                                          </dd>
+                                                                                                                                                          <dt>
+                                                                                                                                                            <strong><a name="item__g_close_">$g-&gt;close()</a></strong>
+                                                                                                                                                          </dt>
+                                                                                                                                                          <dd>
+                                                                                                                                                            <p>
                                                                                                                                                               
-                                                                                                                                                              No environment variables, aside from those used by perl, are required to be
-                                                                                                                                                              set.
-                                                                                                                                                              <hr />
-                                                                                                                                                              <h1><a name="SEE_ALSO">SEE ALSO</a></h1><p>
-                                                                                                                                                                <code>webmake</code><code>ettext2html</code><code>ethtml2text</code><code>HTML::WebMake</code><code>Text::EtText</code><hr />
-                                                                                                                                                                <h1><a name="AUTHOR">AUTHOR</a></h1><p>
+                                                                                                                                                              Close the link glossary; no more links can be written or read.
+                                                                                                                                                              
+                                                                                                                                                            </dd>
+                                                                                                                                                            <dt>
+                                                                                                                                                              <strong><a name="item__url">$url = $g-&gt;get_link ($name)</a></strong>
+                                                                                                                                                            </dt>
+                                                                                                                                                            <dd>
+                                                                                                                                                              <p>
+                                                                                                                                                                
+                                                                                                                                                                Get a named link from the glossary.
+                                                                                                                                                                
+                                                                                                                                                              </dd>
+                                                                                                                                                              <dt>
+                                                                                                                                                                <strong><a name="item__g_put_link">$g-&gt;put_link ($name, $url)</a></strong>
+                                                                                                                                                              </dt>
+                                                                                                                                                              <dd>
+                                                                                                                                                                <p>
                                                                                                                                                                   
-                                                                                                                                                                  Justin Mason &lt;jm /at/ jmason.org&gt;
-                                                                                                                                                                  <hr />
-                                                                                                                                                                  <h1><a name="PREREQUISITES">PREREQUISITES</a></h1><p>
-                                                                                                                                                                    <code>HTML::Entities</code><hr />
-                                                                                                                                                                    <h1>ettext2html(1)</h1><!-- INDEX BEGIN -->
-                                                                                                                                                                    <ul>
-                                                                                                                                                                      <li>
-                                                                                                                                                                        <a href="#NAME">NAME</a><li>
-                                                                                                                                                                          <a href="#SYNOPSIS">SYNOPSIS</a><li>
-                                                                                                                                                                            <a href="#DESCRIPTION">DESCRIPTION</a><li>
-                                                                                                                                                                              <a href="#INSTALLATION">INSTALLATION</a><li>
-                                                                                                                                                                                <a href="#ENVIRONMENT">ENVIRONMENT</a><li>
-                                                                                                                                                                                  <a href="#SEE_ALSO">SEE ALSO</a><li>
-                                                                                                                                                                                    <a href="#AUTHOR">AUTHOR</a><li>
-                                                                                                                                                                                      <a href="#PREREQUISITES">PREREQUISITES</a>
-                                                                                                                                                                                    </ul>
+                                                                                                                                                                  Put a named link to the glossary.
+                                                                                                                                                                  
+                                                                                                                                                                </dd>
+                                                                                                                                                                <dt>
+                                                                                                                                                                  <strong>$url = $g-&gt;get_auto_link ($name)</strong>
+                                                                                                                                                                </dt>
+                                                                                                                                                                <dd>
+                                                                                                                                                                  <p>
+                                                                                                                                                                    
+                                                                                                                                                                    Get a named automatic link from the glossary.
+                                                                                                                                                                    
+                                                                                                                                                                  </dd>
+                                                                                                                                                                  <dt>
+                                                                                                                                                                    <strong><a name="item__g_put_auto_link">$g-&gt;put_auto_link ($name, $url)</a></strong>
+                                                                                                                                                                  </dt>
+                                                                                                                                                                  <dd>
+                                                                                                                                                                    <p>
+                                                                                                                                                                      
+                                                                                                                                                                      Put a named automatic link to the glossary.
+                                                                                                                                                                      
+                                                                                                                                                                    </dd>
+                                                                                                                                                                    <dt>
+                                                                                                                                                                      <strong><a name="item__keys">@keys = $g-&gt;get_auto_link_keys ()</a></strong>
+                                                                                                                                                                    </dt>
+                                                                                                                                                                    <dd>
+                                                                                                                                                                      <p>
+                                                                                                                                                                        
+                                                                                                                                                                        Get a list of the names of automatic links stored in the glossary.
+                                                                                                                                                                        
+                                                                                                                                                                      </dd>
+                                                                                                                                                                      <dt>
+                                                                                                                                                                        <strong><a name="item__g_add_auto_link_keys">$g-&gt;add_auto_link_keys (@keys)</a></strong>
+                                                                                                                                                                      </dt>
+                                                                                                                                                                      <dd>
+                                                                                                                                                                        <p>
+                                                                                                                                                                          
+                                                                                                                                                                          Add to the list of names of automatic links stored in the glossary.
+                                                                                                                                                                          
+                                                                                                                                                                        </dd>
+                                                                                                                                                                      </dl>
+                                                                                                                                                                      <hr />
+                                                                                                                                                                      <h1>ethtml2text(1)</h1><!-- INDEX BEGIN -->
+                                                                                                                                                                      <ul>
+                                                                                                                                                                        <li>
+                                                                                                                                                                          <a href="#NAME">NAME</a><li>
+                                                                                                                                                                            <a href="#SYNOPSIS">SYNOPSIS</a><li>
+                                                                                                                                                                              <a href="#DESCRIPTION">DESCRIPTION</a><li>
+                                                                                                                                                                                <a href="#INSTALLATION">INSTALLATION</a><li>
+                                                                                                                                                                                  <a href="#ENVIRONMENT">ENVIRONMENT</a><li>
+                                                                                                                                                                                    <a href="#SEE_ALSO">SEE ALSO</a><li>
+                                                                                                                                                                                      <a href="#AUTHOR">AUTHOR</a><li>
+                                                                                                                                                                                        <a href="#PREREQUISITES">PREREQUISITES</a>
+                                                                                                                                                                                      </ul>
 <!-- INDEX END -->
-                                                                                                                                                                                                                                                                                                                                                                        <hr />
-                                                                                                                                                                                    <h1><a name="NAME">NAME</a></h1><p>
-                                                                                                                                                                                      
-                                                                                                                                                                                      ettext2html - convert from the simple EtText editable-text format into HTML
-                                                                                                                                                                                      <hr />
-                                                                                                                                                                                      <h1><a name="SYNOPSIS">SYNOPSIS</a></h1><p>
-                                                                                                                                                                                        <pre>
-                                                                                                                                                                                          ettext2html file.txt &gt; file.html
-                                                                                                                                                                                      </pre>
-                                                                                                                                                                                      <hr />
-                                                                                                                                                                                      <h1><a name="DESCRIPTION">DESCRIPTION</a></h1><p>
+                                                                                                                                                                                                                                                                                                                                                                            <hr />
+                                                                                                                                                                                       <h1><a name="NAME">NAME</a></h1><p>
                                                                                                                                                                                         
-                                                                                                                                                                                        ettext2html will convert a text file in the EtText editable-text format
-                                                                                                                                                                                        into HTML.
-                                                                                                                                                                                        <p>
-                                                                                                                                                                                          
-                                                                                                                                                                                          For more information on the EtText format, check the WebMake documentation
-                                                                                                                                                                                          on the web at <a href="http://ettext.taint.org/">http://ettext.taint.org/</a> .
-                                                                                                                                                                                          <hr />
-                                                                                                                                                                                          <h1><a name="INSTALLATION">INSTALLATION</a></h1><p>
+                                                                                                                                                                                        ethtml2text - convert from HTML to the EtText editable-text format
+                                                                                                                                                                                        <hr />
+                                                                                                                                                                                         <h1><a name="SYNOPSIS">SYNOPSIS</a></h1><p>
+                                                                                                                                                                                          <pre>  ethtml2text file.html &gt; file.txt
+</pre><hr />
+                                                                                                                                                                                           <h1><a name="DESCRIPTION">DESCRIPTION</a></h1><p>
                                                                                                                                                                                             
-                                                                                                                                                                                            The <strong>ettext2html</strong> command is part of the <strong>HTML::WebMake</strong> Perl module set. Install this as a normal Perl module, using <code>perl -MCPAN -e shell</code>, or by installing WebMake.
-                                                                                                                                                                                            <hr />
-                                                                                                                                                                                            <h1><a name="ENVIRONMENT">ENVIRONMENT</a></h1><p>
+                                                                                                                                                                                            ethtml2text will convert a HTML file into the EtText editable-text format,
+                                                                                                                                                                                            for use with webmake or ettext2html.
+                                                                                                                                                                                            <p>
                                                                                                                                                                                               
-                                                                                                                                                                                              No environment variables, aside from those used by perl, are required to be
-                                                                                                                                                                                              set.
+                                                                                                                                                                                              For more information on the EtText format, check the WebMake documentation
+                                                                                                                                                                                              on the web at <a href="http://ettext.taint.org/">http://ettext.taint.org/</a> .
                                                                                                                                                                                               <hr />
-                                                                                                                                                                                              <h1><a name="SEE_ALSO">SEE ALSO</a></h1><p>
-                                                                                                                                                                                                <code>webmake</code><code>ettext2html</code><code>ethtml2text</code><code>HTML::WebMake</code><code>Text::EtText</code><hr />
-                                                                                                                                                                                                <h1><a name="AUTHOR">AUTHOR</a></h1><p>
+                                                                                                                                                                                               <h1><a name="INSTALLATION">INSTALLATION</a></h1><p>
+                                                                                                                                                                                                
+                                                                                                                                                                                                The <strong>ethtml2text</strong> command is part of the <strong>HTML::WebMake</strong> Perl module set. Install this as a normal Perl module, using <code>perl -MCPAN -e shell</code>, or by installing WebMake.
+                                                                                                                                                                                                <hr />
+                                                                                                                                                                                                 <h1><a name="ENVIRONMENT">ENVIRONMENT</a></h1><p>
                                                                                                                                                                                                   
-                                                                                                                                                                                                  Justin Mason &lt;jm /at/ jmason.org&gt;
+                                                                                                                                                                                                  No environment variables, aside from those used by perl, are required to be
+                                                                                                                                                                                                  set.
                                                                                                                                                                                                   <hr />
-                                                                                                                                                                                                  <h1><a name="PREREQUISITES">PREREQUISITES</a></h1><p>
-                                                                                                                                                                                                    <code>HTML::Entities</code><hr />
-                                                                                                                                                                                                    
-                                                                                                                                                                                                  </td>
-                                                                                                                                                                                                </tr>
-                                                                                                                                                                                              </table>
-                                                                                                                                                                                            </td>
-                                                                                                                                                                                          </tr>
-                                                                                                                                                                                        </table>
-                                                                                                                                                                                      </td>
-                                                                                                                                                                                    </tr>
-                                                                                                                                                                                  </table>
-                                                                                                                                                                                  <table width="100%">
-                                                                                                                                                                                    <tr>
-                                                                                                                                                                                      <td valign="top">
-                                                                                                                                                                                        <strong><a href="http://ettext.taint.org/">EtText</a>
-                                                                                                                                                                                         Documentation</strong> (version 2.1)
-                                                                                                                                                                                         
-                                                                                                                                                                                      </td>
-                                                                                                                                                                                      <td valign="top">
-                                                                                                                                                                                        <div align="right">
-                                                                                                                                                                                          
-                                                                                                                                                                                           [ <a href="ethtml2text.html">Back</a> | <a href="blurb.html">Forward</a> | <a href="index.html">Index</a>
-                                                                                                                                                                                           | <a href="allinone.html">All&nbsp;In&nbsp;One</a> ]
-                                                                                                                                                                                           
-                                                                                                                                                                                        </div>
-                                                                                                                                                                                      </td>
-                                                                                                                                                                                    </tr>
-                                                                                                                                                                                  </table>
-                                                                                                                                                                                  <div align="right">
-                                                                                                                                                                                    <a href="http://webmake.taint.org/"><img src="images/BuiltWithWebMake.png" border="0" width="88" height="31" /></a>
-                                                                                                                                                                                  </div>
-                                                                                                                                                                                </font>
-                                                                                                                                                                              </body>
-                                                                                                                                                                            </html>
+                                                                                                                                                                                                   <h1><a name="SEE_ALSO">SEE ALSO</a></h1><p>
+                                                                                                                                                                                                     <code>webmake</code> <code>ettext2html</code> <code>ethtml2text</code> <code>HTML::WebMake</code> <code>Text::EtText</code><hr />
+                                                                                                                                                                                                     <h1><a name="AUTHOR">AUTHOR</a></h1><p>
+                                                                                                                                                                                                      
+                                                                                                                                                                                                      Justin Mason &lt;jm /at/ jmason.org&gt;
+                                                                                                                                                                                                      <hr />
+                                                                                                                                                                                                       <h1><a name="PREREQUISITES">PREREQUISITES</a></h1><p>
+                                                                                                                                                                                                         <code>HTML::Entities</code><hr />
+                                                                                                                                                                                                        <h1>ettext2html(1)</h1><!-- INDEX BEGIN -->
+                                                                                                                                                                                                        <ul>
+                                                                                                                                                                                                          <li>
+                                                                                                                                                                                                            <a href="#NAME">NAME</a><li>
+                                                                                                                                                                                                              <a href="#SYNOPSIS">SYNOPSIS</a><li>
+                                                                                                                                                                                                                <a href="#DESCRIPTION">DESCRIPTION</a><li>
+                                                                                                                                                                                                                  <a href="#INSTALLATION">INSTALLATION</a><li>
+                                                                                                                                                                                                                    <a href="#ENVIRONMENT">ENVIRONMENT</a><li>
+                                                                                                                                                                                                                      <a href="#SEE_ALSO">SEE ALSO</a><li>
+                                                                                                                                                                                                                        <a href="#AUTHOR">AUTHOR</a><li>
+                                                                                                                                                                                                                          <a href="#PREREQUISITES">PREREQUISITES</a>
+                                                                                                                                                                                                                        </ul>
+<!-- INDEX END -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                <hr />
+                                                                                                                                                                                                                         <h1><a name="NAME">NAME</a></h1><p>
+                                                                                                                                                                                                                          
+                                                                                                                                                                                                                          ettext2html - convert from the simple EtText editable-text format into HTML
+                                                                                                                                                                                                                          <hr />
+                                                                                                                                                                                                                           <h1><a name="SYNOPSIS">SYNOPSIS</a></h1><p>
+                                                                                                                                                                                                                            <pre>  ettext2html file.txt &gt; file.html
+</pre><hr />
+                                                                                                                                                                                                                             <h1><a name="DESCRIPTION">DESCRIPTION</a></h1><p>
+                                                                                                                                                                                                                              
+                                                                                                                                                                                                                              ettext2html will convert a text file in the EtText editable-text format
+                                                                                                                                                                                                                              into HTML.
+                                                                                                                                                                                                                              <p>
+                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                For more information on the EtText format, check the WebMake documentation
+                                                                                                                                                                                                                                on the web at <a href="http://ettext.taint.org/">http://ettext.taint.org/</a> .
+                                                                                                                                                                                                                                <hr />
+                                                                                                                                                                                                                                 <h1><a name="INSTALLATION">INSTALLATION</a></h1><p>
+                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                  The <strong>ettext2html</strong> command is part of the <strong>HTML::WebMake</strong> Perl module set. Install this as a normal Perl module, using <code>perl -MCPAN -e shell</code>, or by installing WebMake.
+                                                                                                                                                                                                                                  <hr />
+                                                                                                                                                                                                                                   <h1><a name="ENVIRONMENT">ENVIRONMENT</a></h1><p>
+                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                    No environment variables, aside from those used by perl, are required to be
+                                                                                                                                                                                                                                    set.
+                                                                                                                                                                                                                                    <hr />
+                                                                                                                                                                                                                                     <h1><a name="SEE_ALSO">SEE ALSO</a></h1><p>
+                                                                                                                                                                                                                                       <code>webmake</code> <code>ettext2html</code> <code>ethtml2text</code> <code>HTML::WebMake</code> <code>Text::EtText</code><hr />
+                                                                                                                                                                                                                                       <h1><a name="AUTHOR">AUTHOR</a></h1><p>
+                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                        Justin Mason &lt;jm /at/ jmason.org&gt;
+                                                                                                                                                                                                                                        <hr />
+                                                                                                                                                                                                                                         <h1><a name="PREREQUISITES">PREREQUISITES</a></h1><p>
+                                                                                                                                                                                                                                           <code>HTML::Entities</code><hr />
+                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                        </td>
+                                                                                                                                                                                                                                      </tr>
+                                                                                                                                                                                                                                    </table>
+                                                                                                                                                                                                                                  </td>
+                                                                                                                                                                                                                                </tr>
+                                                                                                                                                                                                                              </table>
+                                                                                                                                                                                                                            </td>
+                                                                                                                                                                                                                          </tr>
+                                                                                                                                                                                                                        </table>
+                                                                                                                                                                                                                        <table width="100%">
+                                                                                                                                                                                                                          <tr>
+                                                                                                                                                                                                                            <td valign="top">
+                                                                                                                                                                                                                               <strong><a href="http://ettext.taint.org/">EtText</a>
+                                                                                                                                                                                                                               Documentation</strong> (version 2.2)
+                                                                                                                                                                                                                               
+                                                                                                                                                                                                                            </td>
+                                                                                                                                                                                                                            <td valign="top">
+                                                                                                                                                                                                                              <div align="right">
+                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                 [ <a href="ethtml2text.html">Back</a> | <a href="blurb.html">Forward</a> | <a href="index.html">Index</a>
+                                                                                                                                                                                                                                 | <a href="allinone.html">All&nbsp;In&nbsp;One</a> ]
+                                                                                                                                                                                                                                 
+                                                                                                                                                                                                                              </div>
+                                                                                                                                                                                                                            </td>
+                                                                                                                                                                                                                          </tr>
+                                                                                                                                                                                                                        </table>
+                                                                                                                                                                                                                        <div align="right">
+                                                                                                                                                                                                                           <a href="http://webmake.taint.org/"> <img src="images/BuiltWithWebMake.png" border="0" width="88" height="31" /></a>
+                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                      </font>
+                                                                                                                                                                                                                    </body>
+                                                                                                                                                                                                                  </html>

@@ -61,8 +61,8 @@ sub new {
     'text_strip_para_fonts' => 1,	# strip font tags surrounding paras
     'text_link_indent'	=> '    ',	# default indent for links
 
-    'html_link_open'	=> '"',		# characters used to wrap links
-    'html_link_close'	=> '"',		# characters used to wrap links
+    'html_link_open'	=> '[[',		# characters used to wrap links
+    'html_link_close'	=> ']]',		# characters used to wrap links
   };
 
   bless ($self, $class);
@@ -261,11 +261,7 @@ sub h2t_fix_link {
     $self->{linkdict}->{$thisl} = $self->{text_link_indent}."[$thisl]: $href\n";
   }
 
-  if ($ltxt =~ /\s/) {
-    $self->{html_link_open}.$ltxt.$self->{html_link_close}." [$thisl]";
-  } else {
-    $ltxt." [$thisl]";
-  }
+  $self->{html_link_open}.$ltxt." [$thisl".$self->{html_link_close};
 }
 
 ###########################################################################

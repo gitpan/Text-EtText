@@ -1,6 +1,8 @@
 CVS
 Changes.bak
 pm_to_blib
+ettext2html
+ethtml2text
 distbin
 Makefile
 Makefile.old
