@@ -12,6 +12,7 @@ build/mkrpm
 build/nightly_cron
 build/update_devel
 build/update_stable
+lib/Text/EtText.pm
 lib/Text/EtText/EtText2HTML.pm
 lib/Text/EtText/HTML2EtText.pm
 lib/Text/EtText/LinkGlossary.pm

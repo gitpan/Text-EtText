@@ -101,4 +101,13 @@ Lists where the items are right next to one another...
 
     * and another.
 
+And where they look like they do on-screen in HTML:
 
+    * foo2
+    * bar2
+    * baz2
+    * glorp2
+
+    * withpara 2
+
+that's it.

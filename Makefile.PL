@@ -14,7 +14,7 @@ sub MY::libscan {
 # the contents of the Makefile that is written.
 WriteMakefile(
     'NAME'	=> 'Text::EtText',
-    'VERSION_FROM' => 'lib/Text/EtText/EtText2HTML.pm', # finds $VERSION
+    'VERSION_FROM' => 'lib/Text/EtText.pm', # finds $VERSION
 
     'EXE_FILES'	=> [ 'ethtml2text', 'ettext2html'],
 

@@ -31,24 +31,23 @@ the web at http://webmake.taint.org/ .
 
 package Text::EtText::EtText2HTML;
 
-require Exporter;
 use Carp;
 use strict;
 use locale;
 use HTML::Entities;
 
+use Text::EtText;
 use Text::EtText::LinkGlossary;
 use Text::EtText::DefaultGlossary;
 
 use vars qw{
-	@ISA @EXPORT $VERSION $ATTRS_WITH_URLS $BALANCED_TAG_GEN_TAGS
+	@ISA $VERSION $ATTRS_WITH_URLS $BALANCED_TAG_GEN_TAGS
 	$URL_PROTECTOR $prot
 };
 
-@ISA = qw(Exporter);
-@EXPORT = qw();
+@ISA = qw();
 
-$VERSION = "1.1";
+$VERSION = $Text::EtText::VERSION;
 sub Version { $VERSION; }
 
 # attributes that can take URL arguments: cf. HTML::LinkExtor.
@@ -408,8 +407,8 @@ LOOP:
       redo LOOP;
     }
 
-    if ($$html =~ /\G(<a\s+href[^>]*>)(.*?)<\/a>/gisc) {
-      $done .= $self->markup_a_href($1, $2).'</a>';
+    if ($$html =~ /\G(<a\s+[^>]*href[^>]*>)(.*?)<\/a>/gisc) {
+      $done .= $self->markup_a_href($1, $2);
       redo LOOP;
     }
 
@@ -426,7 +425,7 @@ LOOP:
 sub markup_a_href {
   my ($self, $ahref, $linktext) = @_;
   $_ = $self->markup_html_segment($ahref);
-  $_.$linktext;
+  $_.$linktext."</a>";
 }
 
 sub markup_html_segment {
@@ -448,6 +447,7 @@ sub markup_html_segment {
   s{(${ATTRS_WITH_URLS})\s*=\s*(.+?)(>|\s)}{
     $1."="._handle_link_href ($self->{base}, $2).$3;
   }geisx;
+
   $_;
 }
 
@@ -521,14 +521,32 @@ sub do_entities {
   }gme;
 }
 
+sub make_a_name {
+  my ($txt) = @_;
+  $txt =~ s/[^0-9A-Za-z_]/_/g;
+  $txt =~ s/_+/_/g;
+  $txt =~ s/^_//;
+  $txt =~ s/_$//;
+  $txt;
+}
+
 sub do_headings {
   my ($self, $html) = @_;
   local ($_);
+
   # do headings.
-  $$html =~ s/(^\n+|\n\n)([^\n]+)[ \t]*\n-{3,}\n/$1<h2>$2<\/h2>\n\n/gs;
-  $$html =~ s/(^\n+|\n\n)([^\n]+)[ \t]*\n={3,}\n/$1<h1>$2<\/h1>\n\n/gs;
-  $$html =~ s/(^\n+|\n\n)([^\n]+)[ \t]*\n\~{3,}\n/$1<h3>$2<\/h3>\n\n/gs;
-  $$html =~ s/(^\n+|\n\n)([0-9A-Z][^a-z]+)[ \t]*\n\n/$1<h3>$2<\/h3>\n\n/gs;
+  $$html =~ s{(^\n+|\n\n)([^\n]+)[ \t]*\n-{3,}\n}{
+    "$1<a name=\"".make_a_name($2)."\"><h1>$2</h1></a>\n\n";
+  }ges;
+  $$html =~ s{(^\n+|\n\n)([^\n]+)[ \t]*\n={3,}\n}{
+    "$1<a name=\"".make_a_name($2)."\"><h2>$2</h2></a>\n\n";
+  }ges;
+  $$html =~ s{(^\n+|\n\n)([^\n]+)[ \t]*\n\~{3,}\n}{
+    "$1<a name=\"".make_a_name($2)."\"><h3>$2</h3></a>\n\n";
+  }ges;
+  $$html =~ s{(^\n+|\n\n)([0-9A-Z][^a-z]+)[ \t]*\n\n}{
+    "$1<a name=\"".make_a_name($2)."\"><h3>$2</h3></a>\n\n";
+  }ges;
 
   # now create HRs. Currently we don't bother looking at the
   # character used, and so all hrs look the same; perhaps this
@@ -542,7 +560,7 @@ sub do_headings {
 
   # but HR tags or headings don't need paras.
   $$html =~ s{<p>\s*
-	    (<hr(?:\s[^>]+|)>|<br(?:\s[^>]+|)>|<h\d>.*?<\/h\d>)
+	    (<hr(?:\s[^>]+|)>|<br(?:\s[^>]+|)>|<a[^>]+><h\d>.*?<\/h\d><\/a>)
 	    \s*<\/p>}
 	    {$1}gisx;
   $$html =~ s{<p>\s*
@@ -550,17 +568,7 @@ sub do_headings {
 	    *?)\s*<\/p>}
 	    {$1}gisx;
 
-  $$html =~ s{<(h\d)>\s*(.*?)\s*<\/h\d>}{
-    "<a name=\"".sanitise_name($2)."\"><".$1.">".$2."</".$1."></a>";
-  }geis;	#"
-
   $$html .= "</p>";
-}
-
-sub sanitise_name {
-  my ($name) = shift;
-  $name =~ s/[^-_A-Za-z0-9]/_/g;
-  $name;
 }
 
 sub do_sidebars {
@@ -701,7 +709,7 @@ sub markup_lists {
   local ($_);
   my $html = '';
 
-  # these are:
+  # since li's and lists can be nested, these are stacks:
   # the tag stack indicating which close tag we need to use at end of block
   $self->{list_tag} = [ ];
   # the indentation level of the current block, in spaces.
@@ -709,13 +717,15 @@ sub markup_lists {
   # the optional alternative indent level for the current block.
   # invariant: must be >= {list_indent}.
   $self->{list_alternative_indent} = [ ];
+  # <li>'s seen in this list so far. Used to figure out if the
+  # first <p> tag should be kept or not.
+  $self->{seenitems} = 0;
 
   # strip obsolete list-opening tags.
   $orightml =~ s/^<(?:ul|ol|\/ul|\/ol)>//gim;
   
   # we need to do this line-by-line, it's a LOT easier.
   foreach $_ (split (/\n/, $orightml)) {
-
     if (s/^<p>([ \t]+)//) {
       my ($indent, $rest) = ($1, $');
       $indent =~ s/\t/        /g;
@@ -723,6 +733,11 @@ sub markup_lists {
     }
     elsif (s/^<\/p>//) {
       $html .= $self->indent_item_end () . $_ . "\n";
+      if ($self->{seenitems} > 1) {
+	$html =~ s/<\/?_et_first_p_>//gs;
+      } else {
+	$html =~ s/_et_first_p_/p/gs;
+      }
     }
     elsif (s/^<p>::(\s)//) {
       my $rest = '::'.$1.$';
@@ -765,9 +780,20 @@ sub indent_item_start {
   my $alt_indent = 0;
   $self->get_current_indent_level();
 
-  my $openptag = '';
-  my $closeptag = '';
-  if ($hasptag) { $openptag = '<p>'; $closeptag = '</p>'; }
+  my $openptag = undef;
+  my $closeptag = undef;
+
+  if ($hasptag) {
+    if ($self->{seenitems} == 0) {
+      $openptag = '<_et_first_p_>'; $closeptag = '</_et_first_p_>';
+    } else {
+      $openptag = '<p>'; $closeptag = '</p>';
+    }
+  } else {
+    $openptag = ''; $closeptag = '';
+  }
+
+  $self->{seenitems}++;
 
   if ($line =~ s/^[-\*\+o](\s+)//) {
     $listblock = 'ul';
@@ -840,11 +866,15 @@ sub indent_list_end {
 sub get_current_indent_level {
   my ($self) = @_;
 
-  $self->{curbloctag} = ${$self->{list_tag}}[0];
-  $self->{curindent} = ${$self->{list_indent}}[0];
-  $self->{curaltindent} = ${$self->{list_alternative_indent}}[0];
-  $self->{curindent} ||= 0;
-  $self->{curaltindent} ||= 0;
+  $self->{curbloctag} = $self->{list_tag}->[0];
+  $self->{curindent} = $self->{list_indent}->[0];
+  $self->{curaltindent} = $self->{list_alternative_indent}->[0];
+
+  if (!defined $self->{curindent}) {
+    $self->{curindent} = 0;
+    $self->{curaltindent} = 0;
+    $self->{seenitems} = 0;
+  }
 }
 
 sub push_indent_level ($$$$$) {

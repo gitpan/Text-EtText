@@ -2,7 +2,7 @@
 
 use lib '.'; use lib 't';
 use EtTest; ettext_t_init("etlists");
-use Test; BEGIN { plan tests => 19 };
+use Test; BEGIN { plan tests => 21 };
 
 # ---------------------------------------------------------------------------
 
@@ -56,6 +56,24 @@ use Test; BEGIN { plan tests => 19 };
    </li> <li> <p> with a paragraph break </p> </li> <li> <p> and another. 
    </p> </li> </ul>},
   'tight_lists',
+
+  q{</ul><p>And where they look like they do on-screen in HTML:
+  </p>
+
+  <ul><li>foo2
+  </li>
+  <li>bar2
+  </li>
+  <li>baz2
+  </li>
+  <li>glorp2
+  </li>
+
+  <li><p>withpara 2
+  </p></li>
+
+  </ul><p>that's it.}, 'tight_lists_2',
+
 
 );
 

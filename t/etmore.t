@@ -17,17 +17,17 @@ use Test; BEGIN { plan tests => 17 };
   'ettext_link_bug',
 
   q{Test of lists right beside one another.  </p> <ul> <li>
-  <p> a list item </p> </li> <li> another </li> <li>
+  a list item </li> <li> another </li> <li>
   and another. This one's a bit longer though... blah blah blah
    foo blah etc blah </li> <ul> <li> nest 'em!  </li> <li>
   again </li> </ul> <li> and back.  </li> </ul>},
   'ettext_sardine_lists',
 
-  q{<h1>Title right at top of page</h1>},
-  'h1_title_at_top',
- 
-  q{<h2>Smaller title at top of page</h2>},
+  q{<h2>Title right at top of page</h2>},
   'h2_title_at_top',
+ 
+  q{<h1>Smaller title at top of page</h1>},
+  'h1_title_at_top',
 
   q{ <hr /> <p> That was a HR. so is this: </p> <hr /> },
   'hrs_at_top',

@@ -1,3 +1,32 @@
+2001-04-23 13:57  jmason
+
+	* Changes, build/get_version: [no log message]
+
+2001-04-23 00:09  jmason
+
+	* Changes, build/mkrpm, lib/Text/EtText/EtText2HTML.pm,
+	lib/Text/EtText/HTML2EtText.pm: oops, conflicts
+
+2001-04-23 00:08  jmason
+
+	* lib/Text/EtText.pm: pod cleanup
+
+2001-04-22 23:59  jmason
+
+	* README: added modules line
+
+2001-04-22 23:51  jmason
+
+	* MANIFEST, Makefile.PL, lib/Text/EtText.pm,
+	lib/Text/EtText/EtText2HTML.pm: added CPAN module
+
+2001-04-06 12:02  jmason
+
+	* lib/Text/EtText/EtText2HTML.pm, t/etlists.t, t/etmore.t,
+	t/ettextlinks.t, t/ettextmarkup.t, t/data/etlists.etx: --- lines
+	now do h1's, === for h2's. Bug fixed: first item of a list now does
+	not have p tags unless there's a blank line after it.
+
 2001-03-21 00:50  jmason
 
 	* Makefile.PL: fixed make install

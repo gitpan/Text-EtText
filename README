@@ -16,6 +16,10 @@ TextFormattingRules or Zope's StructuredText.
 
 EtText is distributed under the same licensing terms as Perl itself.
 
+Name           DSLI  Description                                  Info
+-------------  ----  -------------------------------------------- -----
+Text::EtText   RmpO  editable-text format for HTML output         JMASON
+
 ---------------------------------------------------------------------------
 
 INSTALLATION

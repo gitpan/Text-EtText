@@ -129,7 +129,7 @@ sub html2text {
   $txt =~ s/^\s+//gs;
   $txt =~ s/\s+$//gs;
 
-  $txt =~ s{\s*<ul>(.*?)<\/ul>\s*}{ &html2text_list ('ul', $1, '*'); }geis;
+  $txt =~ s{\s*<ul>(.*?)<\/ul>\s*}{ &html2text_list ('ul', $1, '-'); }geis;
   $txt =~ s{\s*<ol>(.*?)<\/ol>\s*}{ &html2text_list ('ol', $1, '1.'); }geis;
 
   $txt =~ s{\s*<blockquote>(.*?)<\/blockquote>\s*}{
@@ -175,7 +175,7 @@ sub html2text {
 	# strip <font> tags around paragraphs
 	1 while s/^\s*<font\s[^>]+>\s*//gi;
 	# and around list items
-	1 while s/^(\s*[\*\#]\s+)<font\s[^>]+>\s*/$1/gi;
+	1 while s/^(\s*[\*\#\-]\s+)<font\s[^>]+>\s*/$1/gi;
 	# and the closing tags
 	1 while s/\s*<\/font>\s*$//gi;
       }
@@ -313,7 +313,7 @@ sub html2text_list {
   $str =~ s/<\/li>\s*/\n\n/gis;
   $str =~ s/<li>\s*/\n\n${bullet} /gis;
   $str =~ s/^/    /gm;
-  "\n\n<$listtag>\n\n$str\n\n</$listtag>\n\n";
+  "\n\n$str\n\n";
 }
 
 ###########################################################################

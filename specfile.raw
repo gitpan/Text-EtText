@@ -67,6 +67,6 @@ make PREFIX=$RPM_BUILD_ROOT/usr install
 
 %{siteperldir}/Text/EtText/*.pm
 
-%doc	README Changes TODO LICENSE MANIFEST MANIFEST.SKIP
+%doc	README Changes TODO MANIFEST MANIFEST.SKIP
 %doc	doc/*
 

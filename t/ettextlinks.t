@@ -8,7 +8,7 @@ use Test; BEGIN { plan tests => 43 };
 
 %patterns = (
 
-  q{<h2>LINKS TEST</h2>},
+  q{<h1>LINKS TEST</h1>},
   'header',
 
   q{<p>This is a test of a single-word
